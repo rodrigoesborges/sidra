@@ -5,8 +5,7 @@ Version: 0.1.3
 Authors@R: c(person(given = "Rodrigo", 
                     family = "Borges",
                     role = c("cre","aut"),
-                    comment = "\"aut\",\"cre\""),
-                    email = "rodrigo@borges.net.br")
+                    email = "rodrigo@borges.net.br"))
 Author: Authors@R
 Maintainer: Rodrigo Borges <rodrigo@borges.net.br>
 Description: Ferramentas para acessar e manipular dados via API do SIDRA do IBGE.
