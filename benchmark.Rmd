@@ -1,0 +1,8 @@
+library(RSIDRA)
+library(sidra)
+library(microbenchmark)
+microbenchmark(
+  RSIDRA <<- RSIDRA::API_SIDRA(1612, 81,nivel=1),
+  sidra <<- sidra::sidra(1612, classificador=81, nivel = "N1"),
+  times = 10)
+

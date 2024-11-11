@@ -1,7 +1,7 @@
 ---
-title: "Introduction to sidra package"
+title: "Introdução ao pacote sidra"
 author: "Rodrigo E. S. Borges"
-output: rmarkdown::html_vignette
+output: github_document
 vignette: >
   %\VignetteIndexEntry{sidra}
   %\VignetteEngine{knitr::rmarkdown}
