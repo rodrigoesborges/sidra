@@ -4,7 +4,7 @@ Rodrigo E. S. Borges
 
 # sidra <img src='man/figures/logo.png' align="right" height="139" />
 
-[![codecov](https://codecov.io/gh/rodrigoesborges/sidra/graph/badge.svg?token=7B3AMAQYHS)](https://codecov.io/gh/rodrigoesborges/sidra)
+[![codecov](https://codecov.io/gh/rodrigoesborges/sidra/graph/badge.svg?token=7B3AMAQYHS)](https://app.codecov.io/gh/rodrigoesborges/sidra)
 
 # Introdução
 
@@ -167,4 +167,5 @@ Para maiores informações, visite a documentação da API SIDRA e explore
 as funções adicionais do pacote.
 
 Para maiores detalhes, consulte a vinheta [Introdução ao
-sidra](https://CRAN.R-project.org/package=sidra/vignettes/sidra.html) .
+sidra](https://github.com/rodrigoesborges/sidra/blob/main/vignettes/sidra.Rmd)
+.
