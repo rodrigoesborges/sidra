@@ -1,4 +1,4 @@
-context("checa-saida")  # Script "test-checa-saida.R"
+# context("checa-saida")  # Script "test-checa-saida.R"
 library(testthat)        # load testthat package
 library(sidra)       # load our package
 
