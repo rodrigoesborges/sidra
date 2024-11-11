@@ -4,6 +4,7 @@
 #' que possuem o termo buscado.
 #' @param termo Termo.
 #' @keywords IBGE SIDRA dados search
+#' @importFrom dplyr arrange
 #' @export
 #' @examples
 #' class_pam <- tab_class(1612)
@@ -12,8 +13,8 @@
 tab_search <- function(termo) {
   df <- sidra::sidrameta
   resp <- df[grepl(termo,df[[2]],ignore.case=T)|grepl(termo,df[[4]],ignore.case=T),c("id","literal","agregacao")]|>
-    dplyr::arrange(id)
+    dplyr::arrange("id")
   resp[[3]] <- resp[[3]]=="V"
-  names(resp) <- c("ID do Agregado/Tabela","Descrição","Variável")
+  names(resp) <- c("ID do Agregado/Tabela","Descri\u00e7\u00e3o","Vari\u00e1vel")
   resp
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/tab_search.R
 \name{tab_search}
 \alias{tab_search}
-\title{Busca de tabelas/agregados via API SIDRA - IBGE}
+\title{Busca de tabelas/agregados ou variáveis via API SIDRA - IBGE}
 \usage{
 tab_search(termo)
 }
