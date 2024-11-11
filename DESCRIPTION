@@ -6,6 +6,7 @@ Author: c(person("Rodrigo E. S. Borges",email="rodrigo@borges.net.br",role=c("au
 Maintainer: Rodrigo Borges <rodrigo@borges.net.br>
 Description: Ferramentas para acessar e manipular dados via API do SIDRA do IBGE.
 License: GPL-3 + file LICENSE
+Language: pt-BR
 Encoding: UTF-8
 LazyData: true
 Imports: httr,data.table,rjson,tidyr,dplyr

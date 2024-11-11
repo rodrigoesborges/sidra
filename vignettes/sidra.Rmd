@@ -3,7 +3,7 @@ title: "Introduction to sidra package"
 author: "Rodrigo E. S. Borges"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{sidra}
+  %\VignetteIndexEntry{Introduction to sidra package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
