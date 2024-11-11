@@ -6,3 +6,6 @@
 ^README.Rmd
 ^benchmark.Rmd
 ^.github
+^.gitignore
+^.git
+^.Rhistory
