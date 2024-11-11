@@ -1,2 +1,2 @@
 # sidra
-IBGE SIDRA via https://servicodados.ibge.gov.br/
+R Package - IBGE SIDRA via https://servicodados.ibge.gov.br/
