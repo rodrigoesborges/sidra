@@ -171,7 +171,7 @@ sidra <- function (tabela, classificador="",
     lapply(1:length(res),\(x) arrumado(x))
 
   )
-  res$valor <- as.numeric(res$valor)
+  res$valor <- supressWarnings(as.numeric(res$valor))
   return(res)
 
 }
