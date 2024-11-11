@@ -2,7 +2,7 @@
 % Please edit documentation in R/sidra.R
 \name{sidra}
 \alias{sidra}
-\title{Conexão do R com a SIDRA - IBGE}
+\title{coleta de dados via API SIDRA - IBGE}
 \usage{
 sidra(
   tabela,

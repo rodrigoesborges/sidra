@@ -1,4 +1,4 @@
-#' Conexão do R com a SIDRA - IBGE
+#' coleta de dados via API SIDRA - IBGE
 #'
 #' Esta função retorna a tabela solicitada em formato data.frame.
 #' @param tabela Número da tabela.
@@ -16,19 +16,19 @@
 #' PAM <- sidra(1612, 81)
 
 sidra <- function (tabela, classificador="",
-                       filtro_cats , nivel = min(tab_niveis(tabela)$nivel.id),
-                       filtro_niveis,
-                       periodo =
+                   filtro_cats , nivel = min(tab_niveis(tabela)$nivel.id),
+                   filtro_niveis,
+                   periodo =
                      paste0(min(tab_periodos(tabela)),"-",
                             max(tab_periodos(tabela))), variavel = "all",
-                       inicio, fim,part=F)
+                   inicio, fim,part=F)
 {
   if (length(tabela) > 1) {
-    stop("Solicite os dados de uma tabela por vez. Para mais de uma use funções da família apply",
+    stop("Solicite os dados de uma tabela por vez. Para mais de uma use fun\u00e7\u00f5es da fam\u00edlia apply",
          call. = FALSE)
   }
   # if (!tabela %in% sidrameta$id) {
-  #   stop("A tabela informada não é válida", call. = FALSE)
+  #   stop("A tabela informada n\u00e3o \u00e9 v\u00e1lida", call. = FALSE)
   # }
   if (!missing(inicio) && !missing(fim)) {
     periodo <- paste0(inicio, "-", fim)
@@ -42,15 +42,15 @@ sidra <- function (tabela, classificador="",
     periodo <- paste0(periodo,collapse="|")
   }
   if (!missing(filtro_niveis) && length(nivel) != length(filtro_niveis)) {
-    stop("O argumento filtro_niveis, quando especificado, deve ser uma lista de mesmo tamanho que
-         o argumento nivel",
+    stop("O argumento filtro_niveis, quando especificado, deve ser uma lista de
+         mesmo tamanho que o argumento n\u00edvel",
          call. = FALSE)
   }
 
   if (!missing(filtro_cats) && !missing(classificador) &&
       length(classificador) != length(filtro_cats)) {
-    stop("O argumento filtro_cats, quando especificado, deve ser uma lista de mesmo tamanho que
-         o argumento classificador",
+    stop("O argumento filtro_cats, quando especificado,
+         deve ser uma lista de mesmo tamanho que o argumento classificador",
          call. = FALSE)
   }
 
@@ -80,9 +80,9 @@ sidra <- function (tabela, classificador="",
                 "?classificacao=", classifs,
                 "&localidades=", locais)
   print(url)
-  #Cálculo do tamanho da requisição:
+  # C\u00e1lculo do tamanho da requisi\u00e7\u00e3o:
   if(!grepl("-",periodo[1])) {
-  ntemps <- length(periodo)
+    ntemps <- length(periodo)
   } else if (length(periodo)>1){
     ntemps <- length(periodo[periodo >=inicio & periodo<=fim])
   } else {
@@ -94,10 +94,10 @@ sidra <- function (tabela, classificador="",
   } else {
     clg <- tab_class(tabela)
     if(classificador!="") {
-    sbclg <- names(clg)[grepl(paste0("-",classificador,"$"),names(clg))]
-    class_esc <- clg[sbclg]} else {
-      class_esc <- clg
-    }
+      sbclg <- names(clg)[grepl(paste0("-",classificador,"$"),names(clg))]
+      class_esc <- clg[sbclg]} else {
+        class_esc <- clg
+      }
 
     ncats <- sum(sapply(1:length(class_esc),\(x) {nrow(class_esc[[x]])}),na.rm=T)
   }
@@ -113,27 +113,27 @@ sidra <- function (tabela, classificador="",
   print(tamanho)
 
   if (tamanho>1e5 & part) {
-      message(paste(
-        "A consulta excederá o limite de 100.000 permitido pela API.",
-        "Vamos contornar este problema fazendo varias solicitações menores.",
-        "Haverá maior demora", sep = "\n"))
+    message(paste(
+      "A consulta exceder\u00e1 o limite de 100.000 permitido pela API.",
+      "Vamos contornar este problema fazendo v\u00e1rias solicita\u00e7\u00f5es menores.",
+      "Haver\u00e1 maior demora", sep = "\n"))
 
-      periodos <- tab_periodos(tabela)
-      requisicoes <- (tamanho %/% 100000) + 1
+    periodos <- tab_periodos(tabela)
+    requisicoes <- (tamanho %/% 100000) + 1
 
-      cada <- periodos |> split(cut(seq_along(periodos), requisicoes)) |>
-        lapply(range) |> sapply(paste0, collapse = "-")
-      print(cada)
+    cada <- periodos |> split(cut(seq_along(periodos), requisicoes)) |>
+      lapply(range) |> sapply(paste0, collapse = "-")
+    print(cada)
 
-      partes <- data.table::rbindlist(lapply(cada, sidra,
-                               tabela = tabela, classificador = classificador,
-                               filtro_cats = filtro_cats, nivel = nivel,
-                               filtro_niveis = filtro_niveis, variavel = variavel,part=T))
+    partes <- data.table::rbindlist(lapply(cada, sidra,
+                                           tabela = tabela, classificador = classificador,
+                                           filtro_cats = filtro_cats, nivel = nivel,
+                                           filtro_niveis = filtro_niveis, variavel = variavel,part=T))
 
-    }
+  }
 
 
-  # Fazer a requisição GET
+  # Fazer a requisi\u00e7\u00e3o GET
   response <- httr::GET(url)
 
   # verificação do conteúdo
@@ -145,32 +145,33 @@ sidra <- function (tabela, classificador="",
   # Converter o JSON para um data frame
   json_data <- httr::content(response, "text",encoding="UTF-8")
 
-  # Conteúdo já verificado
-res <- rjson::fromJSON(json_data)
+  # Conte\u00fado j\u00e1 verificado
 
-    arrumado <- \(x) {
-      amplia_colunas <- cbind(id=res[[x]]$id,variavel=res[[x]]$variavel,
-                              periodo = names(res[[x]]$resultados[[1]]$series[[1]]$serie),
-                                   do.call(cbind,lapply(1:length(res[[x]]$resultados),
-               \(y) {
-                 df <- data.frame(
-                   valor=unlist(res[[x]]$resultados[[y]]$series[[1]]$serie))
-                 names(df) <- paste0(
-                   paste0(res[[x]]$resultados[[y]]$classificacoes[[1]][c("id","nome")],
-                          collapse="|"),"|",
-                   res[[x]]$resultados[[y]]$classificacoes[[1]][["categoria"]][[1]],
-                   "|",
-                   res[[x]]$resultados[[y]]$series[[1]]$localidade$nome)
-                 df})))|>
-        tidyr::pivot_longer(-(1:3),names_to = c("cod_class","classificador","categoria","local"),
-                            names_sep="\\|",values_to="valor")
+  res <- rjson::fromJSON(json_data)
 
-    }
-res <- data.table::rbindlist(
-  lapply(1:length(res),\(x) arrumado(x))
+  arrumado <- \(x) {
+    amplia_colunas <- cbind(id=res[[x]]$id,variavel=res[[x]]$variavel,
+                            periodo = names(res[[x]]$resultados[[1]]$series[[1]]$serie),
+                            do.call(cbind,lapply(1:length(res[[x]]$resultados),
+                                                 \(y) {
+                                                   df <- data.frame(
+                                                     valor=unlist(res[[x]]$resultados[[y]]$series[[1]]$serie))
+                                                   names(df) <- paste0(
+                                                     paste0(res[[x]]$resultados[[y]]$classificacoes[[1]][c("id","nome")],
+                                                            collapse="|"),"|",
+                                                     res[[x]]$resultados[[y]]$classificacoes[[1]][["categoria"]][[1]],
+                                                     "|",
+                                                     res[[x]]$resultados[[y]]$series[[1]]$localidade$nome)
+                                                   df})))|>
+      tidyr::pivot_longer(-(1:3),names_to = c("cod_class","classificador","categoria","local"),
+                          names_sep="\\|",values_to="valor")
 
-)
-res$valor <- as.numeric(res$valor)
-    return(res)
+  }
+  res <- data.table::rbindlist(
+    lapply(1:length(res),\(x) arrumado(x))
+
+  )
+  res$valor <- as.numeric(res$valor)
+  return(res)
 
 }
