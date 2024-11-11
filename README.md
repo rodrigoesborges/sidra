@@ -2,6 +2,8 @@ Introdução ao pacote sidra
 ================
 Rodrigo E. S. Borges
 
+# sidra <img src='man/figures/logo.png' align="right" height="139" />
+
 [![codecov](https://codecov.io/gh/rodrigoesborges/sidra/graph/badge.svg?token=7B3AMAQYHS)](https://codecov.io/gh/rodrigoesborges/sidra)
 
 # Introdução
