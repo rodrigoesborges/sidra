@@ -5,10 +5,11 @@
 #' @param classificador Classificador a ser detalhado. O padrão é "", retornando os totais da tabela. Para verificar os classificadores disponíveis na tabela em questão use a função tab_class().
 #' @param filtro_cats Código para definição de subconjunto do classificador. Para verificar as categorias disponíveis na tabela em questão use a função tab_class().
 #' @param nivel Nível geográfico de agregação dos dados 1 = Brasil e 6 = Município, etc. Para verificar os níveis disponíveis na tabela em questão use a função tab_niveis().
-#' @param filtro_nivel Código contendo conjunto no nível que será selecionado. Pode-se usar o código de determina UF para obter apenas seus dados ou "all" para todos (padrão). Para mais informações visite http://api.sidra.ibge.gov.br/home/ajuda.
+#' @param filtro_niveis Código contendo conjunto no nível que será selecionado. Pode-se usar o código de determina UF para obter apenas seus dados ou "all" para todos (padrão). Para mais informações visite http://api.sidra.ibge.gov.br/home/ajuda.
 #' @param periodo Período dos dados. O padrão é "all", isto é, todos os anos disponíveis. Para verificar os períodos disponíveis na tabela em questão use a função tab_periodos().
 #' @param variavel Quais variáveis devem retornar? O padrão é "allxp", isto é, todas exceto aquelas calculadas pela SIDRA (percentuais). Para verificar as variáveis disponíveis na tabela em questão use a função tab_vars().
 #' @param inicio,fim Início e fim do período desejado.
+#' @param part interno para quando é preciso fazer várias requisições
 #' @keywords IBGE SIDRA dados
 #' @export
 #' @examples
@@ -20,7 +21,7 @@ sidra <- function (tabela, classificador="",
                        periodo =
                      paste0(min(tab_periodos(tabela)),"-",
                             max(tab_periodos(tabela))), variavel = "all",
-                       inicio, fim)
+                       inicio, fim,part=F)
 {
   if (length(tabela) > 1) {
     stop("Solicite os dados de uma tabela por vez. Para mais de uma use funções da família apply",
@@ -32,8 +33,10 @@ sidra <- function (tabela, classificador="",
   if (!missing(inicio) && !missing(fim)) {
     periodo <- paste0(inicio, "-", fim)
   } else if (missing(fim) && !missing(inicio)) {
+    periodo <- tab_periodos(tabela)
     periodo <- periodo[periodo >= inicio]
   } else if (missing(inicio) && !missing(fim)) {
+    periodo <- tab_periodos(tabela)
     periodo <- periodo[periodo<=fim]
   } else {
     periodo <- paste0(periodo,collapse="|")
@@ -54,7 +57,7 @@ sidra <- function (tabela, classificador="",
   concav <- \(x) paste0(x,collapse=",")
   if(!missing(filtro_cats)) {
     classifs <- paste0(paste0(classificador,"[",lapply(filtro_cats,concav),"]"),collapse="|")
-  } else if(!missing(classificador)){
+  } else if(length(classificador)==0){
     classifs <- paste0(classificador,"[all]",collapse="|")
   } else {
     classifs <- classificador
@@ -102,16 +105,15 @@ sidra <- function (tabela, classificador="",
   if(!missing(filtro_niveis)){
     nlocs <- sum(sapply(1:length(filtro_niveis),\(x){length(filtro_niveis[[x]])}),na.rm=T)
   } else {
-    loc_esc <- tab_locais(tabela)[nivel.id %in% nivel]
+    loc_esc <- tab_niveis(tabela)[tab_niveis(tabela)$nivel.id %in% nivel]
     nlocs <- nrow(loc_esc)
   }
 
   tamanho <- length(variavel)*ntemps*nlocs*ncats
   print(tamanho)
 
-  if (tamanho>1e5) {
+  if (tamanho>1e5 & part) {
       message(paste(
-        conteudo,
         "A consulta excederá o limite de 100.000 permitido pela API.",
         "Vamos contornar este problema fazendo varias solicitações menores.",
         "Haverá maior demora", sep = "\n"))
@@ -119,13 +121,14 @@ sidra <- function (tabela, classificador="",
       periodos <- tab_periodos(tabela)
       requisicoes <- (tamanho %/% 100000) + 1
 
-      cada <- periodos %>% split(cut(seq_along(periodos), requisicoes)) %>%
-        lapply(range) %>% sapply(paste0, collapse = "-")
+      cada <- periodos |> split(cut(seq_along(periodos), requisicoes)) |>
+        lapply(range) |> sapply(paste0, collapse = "-")
+      print(cada)
 
       partes <- data.table::rbindlist(lapply(cada, sidra,
                                tabela = tabela, classificador = classificador,
                                filtro_cats = filtro_cats, nivel = nivel,
-                               filtro_niveis = filtro_niveis, variavel = variavel))
+                               filtro_niveis = filtro_niveis, variavel = variavel,part=T))
 
     }
 

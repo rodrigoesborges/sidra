@@ -5,10 +5,13 @@ Version: 0.1.0
 Author: c(person("Rodrigo E. S. Borges",email="rodrigo@borges.net.br",role=c("aut","cre")))
 Maintainer: Rodrigo Borges <rodrigo@borges.net.br>
 Description: Ferramentas para acessar e manipular dados via API do SIDRA do IBGE.
-License: GPLv3
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: httr,jsonlite
+Imports: httr,data.table,rjson,tidyr
 Depends: 
     R (>= 2.10)
 RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

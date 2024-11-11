@@ -16,16 +16,10 @@
 "agregados"
 
 #available metadata sidra
-library(rvest)
 
-agregados <- tibble::tribble(~id, ~agregado,~rota,
-                             "A","Assunto","assunto",
-                             "C","Classificação","classificacao",
-                             "N","Nível geográfico","nivel",
-                             "P","Período","periodo",
-                             "E","Periodicidade","periodicidade",
-                             "V","Variável","variaveis"
-)
+requireNamespace('readr')
+
+agregados <- utils::read.csv("agregados.csv")
 
 agregacao <- \(x="A"){
   baseag <- "https://servicodados.ibge.gov.br/api/v3/agregados"
@@ -42,8 +36,6 @@ sidrameta <- data.table::rbindlist(lista_agregados)
 
 dir.create("inst/extdata",showWarnings = F,recursive = T)
 
-readr::write_csv(sidrameta, "inst/extdata/sidrameta.csv")
-readr::write_csv(agregados, "inst/extdata/agregados.csv")
+utils::write.csv(sidrameta, "inst/extdata/sidrameta.csv",row.names=F)
+utils::write.csv(agregados, "inst/extdata/agregados.csv",row.names=F)
 
-usethis::use_data(sidrameta, overwrite = TRUE)
-usethis::use_data(agregados, overwrite = TRUE)

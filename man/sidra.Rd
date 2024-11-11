@@ -13,7 +13,8 @@ sidra(
   periodo = paste0(min(tab_periodos(tabela)), "-", max(tab_periodos(tabela))),
   variavel = "all",
   inicio,
-  fim
+  fim,
+  part = F
 )
 }
 \arguments{
@@ -25,13 +26,15 @@ sidra(
 
 \item{nivel}{Nível geográfico de agregação dos dados 1 = Brasil e 6 = Município, etc. Para verificar os níveis disponíveis na tabela em questão use a função tab_niveis().}
 
+\item{filtro_niveis}{Código contendo conjunto no nível que será selecionado. Pode-se usar o código de determina UF para obter apenas seus dados ou "all" para todos (padrão). Para mais informações visite http://api.sidra.ibge.gov.br/home/ajuda.}
+
 \item{periodo}{Período dos dados. O padrão é "all", isto é, todos os anos disponíveis. Para verificar os períodos disponíveis na tabela em questão use a função tab_periodos().}
 
 \item{variavel}{Quais variáveis devem retornar? O padrão é "allxp", isto é, todas exceto aquelas calculadas pela SIDRA (percentuais). Para verificar as variáveis disponíveis na tabela em questão use a função tab_vars().}
 
 \item{inicio, fim}{Início e fim do período desejado.}
 
-\item{filtro_nivel}{Código contendo conjunto no nível que será selecionado. Pode-se usar o código de determina UF para obter apenas seus dados ou "all" para todos (padrão). Para mais informações visite http://api.sidra.ibge.gov.br/home/ajuda.}
+\item{part}{interno para quando é preciso fazer várias requisições}
 }
 \description{
 Esta função retorna a tabela solicitada em formato data.frame.
