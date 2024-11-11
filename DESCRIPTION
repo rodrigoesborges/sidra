@@ -1,7 +1,7 @@
 Package: sidra
 Type: Package
 Title: Acesso aos Dados do SIDRA/IBGE via servicodados.ibge.gov.br
-Version: 0.1.1
+Version: 0.1.2
 Author: c(person("Rodrigo E. S. Borges",email="rodrigo@borges.net.br",role=c("aut","cre")))
 Maintainer: Rodrigo Borges <rodrigo@borges.net.br>
 Description: Ferramentas para acessar e manipular dados via API do SIDRA do IBGE.

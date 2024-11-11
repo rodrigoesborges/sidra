@@ -27,9 +27,9 @@ sidra <- function (tabela, classificador="",
     stop("Solicite os dados de uma tabela por vez. Para mais de uma use fun\u00e7\u00f5es da fam\u00edlia apply",
          call. = FALSE)
   }
-  # if (!tabela %in% sidrameta$id) {
-  #   stop("A tabela informada n\u00e3o \u00e9 v\u00e1lida", call. = FALSE)
-  # }
+  if (!tabela %in% sidra::sidrameta$id) {
+    stop("A tabela informada n\u00e3o \u00e9 v\u00e1lida", call. = FALSE)
+  }
   if (!missing(inicio) && !missing(fim)) {
     periodo <- paste0(inicio, "-", fim)
   } else if (missing(fim) && !missing(inicio)) {

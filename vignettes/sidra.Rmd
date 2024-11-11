@@ -170,8 +170,9 @@ head(dados)
 
 # Avisos e Dicas
 
-    Limites de consulta: Algumas consultas podem exceder o limite de 100.000 registros permitido pela API do IBGE. Nesse caso, por definição o pacote busca dividir a consulta em requisições menores a partir de segmentação dos períodos requisitados. Ainda que robusto, pode não funcionar para todos os casos, pelo qual sugerimos faça a segmentação manualmente da requisição se necessário.
-    Níveis e Classificadores: Ao utilizar filtro_niveis ou filtro_cats, certifique-se de que eles tenham o mesmo tamanho do argumento nivel ou classificador, respectivamente.
+Limites de consulta: Algumas consultas podem exceder o limite de 100.000 registros permitido pela API do IBGE. Nesse caso, por definição o pacote busca dividir a consulta em requisições menores a partir de segmentação dos períodos requisitados. Ainda que robusto, pode não funcionar para todos os casos, pelo qual sugerimos faça a segmentação manualmente da requisição se necessário.
+
+Níveis e Classificadores: Ao utilizar filtro_niveis ou filtro_cats, certifique-se de que eles tenham o mesmo tamanho do argumento nivel ou classificador, respectivamente.
 
 # Conclusão
 

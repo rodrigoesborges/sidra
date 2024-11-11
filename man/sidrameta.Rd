@@ -5,7 +5,7 @@
 \alias{sidrameta}
 \title{API servicodados.ibge ... Todos agregados disponíveis}
 \format{
-An object of class \code{data.table} (inherits from \code{data.frame}) with 12741 rows and 3 columns.
+An object of class \code{data.table} (inherits from \code{data.frame}) with 21470 rows and 4 columns.
 }
 \source{
 \href{https://servicodados.ibge.gov.br/api/v3/agregados/}{IBGE API}

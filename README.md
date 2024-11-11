@@ -2,9 +2,7 @@ Introdução ao pacote sidra
 ================
 Rodrigo E. S. Borges
 
-``` r
-library(sidra)
-```
+[![codecov](https://codecov.io/gh/rodrigoesborges/sidra/graph/badge.svg?token=7B3AMAQYHS)](https://codecov.io/gh/rodrigoesborges/sidra)
 
 # Introdução
 
@@ -55,13 +53,25 @@ e níveis geográficos.
         variavel: Variáveis a serem retornadas; "allxp" exclui variáveis calculadas pela SIDRA.
         inicio, fim: Início e fim do período desejado.
 
-2.  Funções para Classificações (tab_class.R)
+2.  Função tab_search() - Busca de Tabelas e Agregados
 
-Essas funções retornam informações sobre classificações disponíveis para
-uma tabela específica, incluindo os códigos de classificadores.
+A função tab_search() permite buscar tabelas, agregados ou variáveis da
+SIDRA que contenham o termo especificado. Esta função é útil quando você
+deseja encontrar tabelas ou variáveis específicas sem conhecer o número
+exato da tabela.
 
-    tab_class(tabela): Retorna classificações disponíveis para uma tabela específica.
-        tabela: Número da tabela de interesse.
+Essa função retorna uma lista de tabelas ou variáveis que possuem o
+termo especificado na descrição. É útil para encontrar rapidamente as
+tabelas que contêm os dados que você deseja consultar.
+
+    tab_search(termo): Retorna uma lista de agregados ou variáveis que contêm o termo buscado.
+        termo: Termo de busca em texto. A função pesquisa o termo em descrições de tabelas e variáveis.
+
+A função retorna um data frame com três colunas:
+
+    ID do Agregado/Tabela: Número identificador do agregado ou tabela.
+    Descrição: Descrição do agregado ou variável contendo o termo buscado.
+    Variável: Indica se o item retornado é uma variável (TRUE) ou uma tabela/agregado (FALSE).
 
 3.  Funções para Fonte dos Dados (tab_fonte.R)
 
@@ -80,53 +90,29 @@ informações detalhadas sobre o conteúdo da tabela.
     tab_meta(tabela): Retorna metadados para uma tabela específica.
         tabela: Número da tabela de interesse.
 
-5.  Funções para Níveis Geográficos (tab_niveis.R)
-
-Essas funções retornam informações sobre os níveis geográficos
-disponíveis para uma tabela, como Brasil, Região, Estado, ou Município.
-
-    tab_niveis(tabela): Retorna níveis geográficos disponíveis para a tabela especificada.
-        tabela: Número da tabela de interesse.
-
-6.  Funções para Períodos (tab_periodos.R)
-
-Essas funções permitem listar os períodos disponíveis para uma tabela,
-como anos ou meses, dependendo da periodicidade dos dados.
-
-    tab_periodos(tabela): Retorna os períodos disponíveis para a tabela especificada.
-        tabela: Número da tabela de interesse.
-
-7.  Funções para Variáveis (tab_vars.R)
-
-Essas funções listam as variáveis disponíveis em uma tabela específica,
-como diferentes métricas ou indicadores que podem ser selecionados.
-
-    tab_vars(tabela): Retorna variáveis disponíveis para a tabela especificada.
-        tabela: Número da tabela de interesse.
-
 ## Exemplos de Uso
 
 Aqui estão exemplos de como usar essas funções para consultar dados
 específicos na API SIDRA.
 
-### Listar Classificações
+### Procurar por termos
 
-Para listar as classificações disponíveis para uma tabela específica,
-como a tabela 1612:
-
-``` r
-classificacoes <- tab_class(1612)
-print(classificacoes)
-```
-
-Para obter a fonte dos dados de uma tabela específica:
-
-### Obter Fonte dos Dados
+Aqui está um exemplo de como usar tab_search() para buscar tabelas e
+variáveis que contêm o termo “produção”.
 
 ``` r
-fonte <- tab_fonte(1612)
-print(fonte)
+# Carregar o pacote
+library(sidra)
+
+# Buscar tabelas e variáveis que contenham "produção" na descrição
+resultados <- tab_search("produção")
+print(resultados)
 ```
+
+Esse comando retornará uma lista de tabelas e variáveis que contêm
+“produção” na descrição. Essa funcionalidade é útil para explorar as
+tabelas disponíveis na SIDRA quando você não conhece o número exato da
+tabela ou variável que está procurando.
 
 ### Obter Metadados da Tabela
 
@@ -135,24 +121,6 @@ Para acessar os metadados de uma tabela específica, como a tabela 1612:
 ``` r
 metadados <- tab_meta(1612)
 print(metadados)
-```
-
-### Listar Níveis Geográficos
-
-Para listar os níveis geográficos disponíveis para a tabela 1612:
-
-``` r
-niveis <- tab_niveis(1612)
-print(niveis)
-```
-
-### Listar Períodos Disponíveis
-
-Para listar os períodos disponíveis para a tabela 1612:
-
-``` r
-periodos <- tab_periodos(1612)
-print(periodos)
 ```
 
 ### Listar Variáveis Disponíveis
@@ -178,8 +146,16 @@ head(dados)
 
 # Avisos e Dicas
 
-    Limites de consulta: Algumas consultas podem exceder o limite de 100.000 registros permitido pela API do IBGE. Nesse caso, por definição o pacote busca dividir a consulta em requisições menores a partir de segmentação dos períodos requisitados. Ainda que robusto, pode não funcionar para todos os casos, pelo qual sugerimos faça a segmentação manualmente da requisição se necessário.
-    Níveis e Classificadores: Ao utilizar filtro_niveis ou filtro_cats, certifique-se de que eles tenham o mesmo tamanho do argumento nivel ou classificador, respectivamente.
+Limites de consulta: Algumas consultas podem exceder o limite de 100.000
+registros permitido pela API do IBGE. Nesse caso, por definição o pacote
+busca dividir a consulta em requisições menores a partir de segmentação
+dos períodos requisitados. Ainda que robusto, pode não funcionar para
+todos os casos, pelo qual sugerimos faça a segmentação manualmente da
+requisição se necessário.
+
+Níveis e Classificadores: Ao utilizar filtro_niveis ou filtro_cats,
+certifique-se de que eles tenham o mesmo tamanho do argumento nivel ou
+classificador, respectivamente.
 
 # Conclusão
 
@@ -188,5 +164,5 @@ fluxo de trabalho mais ágil para análises de dados diretamente no R.
 Para maiores informações, visite a documentação da API SIDRA e explore
 as funções adicionais do pacote.
 
-Esperamos que esta vignette ajude você a começar a usar o sidra e
-realizar análises com dados do IBGE.
+Para maiores detalhes, consulte a vinheta [Introdução ao
+sidra](https://CRAN.R-project.org/package=sidra/vignettes/sidra.html) .
