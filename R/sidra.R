@@ -14,14 +14,13 @@
 #' @keywords IBGE SIDRA dados
 #' @export
 #' @examples
-#' ipcaq <- sidra(1705,classificador=315,periodo='201202-201204')
+#' ipcaq <- sidra(1705,classificador=315,periodo='201202')
 
 sidra <- function (tabela, classificador="",
                    filtro_cats ="", nivel = "N1",
                    filtro_niveis,
-                   periodo = {
-                     x <- tab_meta(1705)$periodicidade
-                     paste0(x$inicio,"-",x$fim)}, variavel = "all",
+                   periodo =
+                     tab_meta(tabela)$periodicidade$fim, variavel = "all",
                    inicio, fim,part=F,printurl=F)
 {
   if (length(tabela) > 1) {
@@ -102,7 +101,9 @@ sidra <- function (tabela, classificador="",
   ntemps <- if(is.character(periodo) && !grepl("-",periodo[1])) {
     length(periodo)
   } else if (length(periodo)>1){
-    length(periodo[periodo >=inicio & periodo<=fim])
+    length(metatab$periodos[metatab$periodos >=inicio & metatab$periodos<=fim])
+  } else if (grepl("-",periodo[1])) {
+    length(metatab$periodos[metatab$periodos >=substr(periodo[1],1,6) & metatab$periodos<=substr(periodo[1],8,nchar(periodo))])
   } else {
     length(metatab$periodos)
   }

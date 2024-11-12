@@ -14,8 +14,8 @@ Esta função retorna uma lista com níveis territoriais disponíveis
 de uma das tabelas da SIDRA.
 }
 \examples{
-niveis_pam <- tab_niveis(1612)
-tab_niveis(1612) # imprime os classificadores com sua descrição
+niveis_ipca15 <- tab_niveis(1705)
+tab_niveis(1705) # imprime os classificadores com sua descrição
 }
 \keyword{IBGE}
 \keyword{SIDRA}

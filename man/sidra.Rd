@@ -7,10 +7,10 @@
 sidra(
   tabela,
   classificador = "",
-  filtro_cats,
+  filtro_cats = "",
   nivel = "N1",
   filtro_niveis,
-  periodo = "all",
+  periodo = tab_meta(tabela)$periodicidade$fim,
   variavel = "all",
   inicio,
   fim,
@@ -43,7 +43,7 @@ sidra(
 Esta função retorna a tabela solicitada em formato data.frame.
 }
 \examples{
-ipcaq <- sidra(1705,classificador=7169)
+ipcaq <- sidra(1705,classificador=315,periodo='201202')
 }
 \keyword{IBGE}
 \keyword{SIDRA}

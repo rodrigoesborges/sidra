@@ -13,8 +13,8 @@ tab_fonte(tabela)
 Esta função retorna a fontede uma das tabelas da SIDRA.
 }
 \examples{
-fonte_pam <- tab_fonte(1612)
-tab_fonte(1612) # imprime os classificadores com sua descrição
+fonte_ipcaq <- tab_fonte(1705)
+tab_fonte(1705) # imprime os classificadores com sua descrição
 }
 \keyword{IBGE}
 \keyword{SIDRA}
