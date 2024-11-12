@@ -43,7 +43,7 @@ sidra(
 Esta função retorna a tabela solicitada em formato data.frame.
 }
 \examples{
-PAM <- sidra(1612, 81)
+ipcaq <- sidra(1705,classificador=7169)
 }
 \keyword{IBGE}
 \keyword{SIDRA}

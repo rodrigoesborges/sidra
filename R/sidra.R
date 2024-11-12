@@ -14,12 +14,14 @@
 #' @keywords IBGE SIDRA dados
 #' @export
 #' @examples
-#' PAM <- sidra(1612, 81)
+#' ipcaq <- sidra(1705,classificador=315,periodo='201202-201204')
 
 sidra <- function (tabela, classificador="",
-                   filtro_cats , nivel = "N1",
+                   filtro_cats ="", nivel = "N1",
                    filtro_niveis,
-                   periodo = "all", variavel = "all",
+                   periodo = {
+                     x <- tab_meta(1705)$periodicidade
+                     paste0(x$inicio,"-",x$fim)}, variavel = "all",
                    inicio, fim,part=F,printurl=F)
 {
   if (length(tabela) > 1) {
@@ -34,14 +36,16 @@ sidra <- function (tabela, classificador="",
   metatab <- tab_meta(tabela)
 
   #Determinação do período de forma vetorizada
-  perido <-   if (!missing(inicio) && !missing(fim)) {
+  periodo <-   if (!missing(inicio) && !missing(fim)) {
     paste0(inicio, "-", fim)
   } else if (missing(fim) && !missing(inicio)) {
-    metatab$periodo[metatab$periodo >= inicio]
+    metatab$periodos[metatab$periodos >= inicio]
   } else if (missing(inicio) && !missing(fim)) {
-    metatab$periodo[metatab$periodo <= inicio]
-  } else {
+    metatab$periodos[metatab$periodos <= inicio]
+  } else if (length(periodo)>1){
     paste0(periodo,collapse="|")
+  } else {
+    periodo
   }
 
   #Validando e ajustando `filtro_niveis` e `filtro_cats`
@@ -77,6 +81,7 @@ sidra <- function (tabela, classificador="",
   }
 
   # Concatenando variáveis de forma otimizada
+  qtdvar <- length(variavel)
   variavel <-
   if(length(variavel)>1) {
     paste0(variavel,collapse="|")
@@ -85,11 +90,11 @@ sidra <- function (tabela, classificador="",
 
   #Construindo URL
   base_url <- "https://servicodados.ibge.gov.br/api/v3/agregados/"
-  url <- paste0(base_url, tabela,
+  url <- gsub("\\[\\]","",paste0(base_url, tabela,
                 "/periodos/", periodo,
                 "/variaveis/", variavel,
                 "?classificacao=", classifs,
-                "&localidades=", locais)
+                "&localidades=", locais))
 
   if(printurl){print(url)}
 
@@ -104,7 +109,7 @@ sidra <- function (tabela, classificador="",
 
   # Definindo ncats
   ncats <- if(!missing(filtro_cats)){
-    ncats <- sum(sapply(filtro_cats,nrow),na.rm=T)
+    sum(sapply(filtro_cats,length),na.rm=T)
   } else {
     class_esc <-
     if(classificador!="") {
@@ -125,27 +130,40 @@ sidra <- function (tabela, classificador="",
     nlocs <- nrow(nvl[nvl$nivel.id %in% nivel])
   }
 
-  # Calculando tamanho da consulta e particionando se necessário
-  tamanho <- length(variavel)*ntemps*nlocs*ncats
+  nvars <-{
+    if(qtdvar>1){
+      qtdvar
+    } else if(variavel=="all"){
+      nrow(metatab$variaveis)
+    } else {1}
+  }
 
-  if (tamanho>1e5 & part) {
+  # Calculando tamanho da consulta e particionando se necessário
+  tamanho <- ifelse(part==T,0,nvars*ntemps*nlocs*ncats)
+  print(tamanho)
+  if (tamanho>1e5) {
     message(paste(
       "A consulta exceder\u00e1 o limite de 100.000 permitido pela API.",
       "Vamos contornar este problema fazendo v\u00e1rias solicita\u00e7\u00f5es menores.",
       "Haver\u00e1 maior demora", sep = "\n"))
 
     periodos <- metatab$periodos
-    requisicoes <- (tamanho %/% 100000) + 1
+    requisicoes <- (tamanho %/% 100000) + 3
 
     cada <- periodos |> split(cut(seq_along(periodos), requisicoes)) |>
       lapply(range) |> sapply(paste0, collapse = "-")
+  print(cada)
+  fnvl <- ifelse(missing(filtro_niveis),"",filtro_niveis)
+  fcats <- ifelse(missing(filtro_cats),"",filtro_cats)
 
-
-    partes <- data.table::rbindlist(lapply(cada, sidra,
-                                           tabela = tabela, classificador = classificador,
-                                           filtro_cats = filtro_cats, nivel = nivel,
-                                           filtro_niveis = filtro_niveis, variavel = variavel,part=T))
-
+    res <- lapply(cada, \(x) {sidra(
+           tabela = tabela, classificador = classificador,
+           filtro_cats = filtro_cats, nivel = nivel,
+           filtro_niveis = fnvl,
+           periodo= x,
+           variavel = variavel,part=T,printurl=printurl)})
+    res <- data.table::rbindlist(res)
+    return(res)
   }
 
 

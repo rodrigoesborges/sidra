@@ -5,8 +5,8 @@
 #' @keywords IBGE SIDRA dados classificadores
 #' @export
 #' @examples
-#' class_pam <- tab_class(1612)
-#' tab_class(1612) # imprime os classificadores com sua descrição
+#' class_ipcaq <- tab_class(1705)
+#' tab_class(1705) # imprime os classificadores com sua descrição
 
 tab_class <- function(tabela) {
   tab_meta(tabela)$classificacoes

@@ -5,8 +5,8 @@
 #' @keywords IBGE SIDRA dados periodos
 #' @export
 #' @examples
-#' periodos_pam <- tab_periodos(1612)
-#' tab_periodos(1612) # imprime os classificadores com sua descrição
+#' periodos_ipcaq <- tab_periodos(1705)
+#' tab_periodos(1705) # imprime os classificadores com sua descrição
 
 tab_periodos <- function(tabela) {
   tab_meta(tabela)$periodos

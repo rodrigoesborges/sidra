@@ -5,8 +5,8 @@
 #' @keywords IBGE SIDRA metadados fonte
 #' @export
 #' @examples
-#' fonte_pam <- tab_fonte(1612)
-#' tab_fonte(1612) # imprime os classificadores com sua descrição
+#' fonte_ipcaq <- tab_fonte(1705)
+#' tab_fonte(1705) # imprime os classificadores com sua descrição
 
 tab_fonte <- function(tabela) {
   tab_meta(tabela)$pesquisa

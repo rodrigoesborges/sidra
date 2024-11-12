@@ -9,7 +9,7 @@ Authors@R: c(person(given = "Rodrigo",
                     comment = "affiliation - Distintive Lab & UnDF"))
 Maintainer: Rodrigo Borges <rodrigo@borges.net.br>
 Description: Ferramentas para acessar e manipular dados via API do SIDRA do IBGE.
-License: GPL-3 + file LICENSE
+License: GPL-3
 Language: pt-BR
 Encoding: UTF-8
 LazyData: true
