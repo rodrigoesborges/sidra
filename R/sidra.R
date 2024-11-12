@@ -19,7 +19,7 @@ sidra <- function (tabela, classificador="",
                    filtro_cats , nivel = "N1",
                    filtro_niveis,
                    periodo = "all", variavel = "all",
-                   inicio, fim,part=F)
+                   inicio, fim,part=F,printurl=F)
 {
   if (length(tabela) > 1) {
     stop("Solicite os dados de uma tabela por vez. Para mais de uma use fun\u00e7\u00f5es da fam\u00edlia apply",
@@ -89,6 +89,8 @@ sidra <- function (tabela, classificador="",
                 "/variaveis/", variavel,
                 "?classificacao=", classifs,
                 "&localidades=", locais)
+
+  if(printurl){print(url)}
 
   # C\u00e1lculo do tamanho da requisi\u00e7\u00e3o:
   ntemps <- if(is.character(periodo) && !grepl("-",periodo[1])) {
