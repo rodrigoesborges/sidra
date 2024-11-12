@@ -10,6 +10,7 @@
 #' @param variavel Quais variáveis devem retornar? O padrão é "allxp", isto é, todas exceto aquelas calculadas pela SIDRA (percentuais). Para verificar as variáveis disponíveis na tabela em questão use a função tab_vars().
 #' @param inicio,fim Início e fim do período desejado.
 #' @param part interno para quando é preciso fazer várias requisições
+#' @param printurl imprime url construído para transparência e debugging
 #' @keywords IBGE SIDRA dados
 #' @export
 #' @examples

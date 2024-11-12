@@ -14,7 +14,8 @@ sidra(
   variavel = "all",
   inicio,
   fim,
-  part = F
+  part = F,
+  printurl = F
 )
 }
 \arguments{
@@ -35,6 +36,8 @@ sidra(
 \item{inicio, fim}{Início e fim do período desejado.}
 
 \item{part}{interno para quando é preciso fazer várias requisições}
+
+\item{printurl}{imprime url construído para transparência e debugging}
 }
 \description{
 Esta função retorna a tabela solicitada em formato data.frame.
