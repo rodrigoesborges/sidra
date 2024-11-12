@@ -14,8 +14,8 @@ Esta função retorna uma lista com agregados, tabelas ou variáveis da SIDRA
 que possuem o termo buscado.
 }
 \examples{
-class_pam <- tab_class(1612)
-tab_class(1612) # imprime os classificadores com sua descrição
+tabs_ipca <- tab_search('IPCA15')
+tab_search('IPCA15') # imprime tabelas/agregados/variáveis com o termo pesquisado.
 }
 \keyword{IBGE}
 \keyword{SIDRA}

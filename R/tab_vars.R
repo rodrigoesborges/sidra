@@ -5,8 +5,8 @@
 #' @keywords IBGE SIDRA dados variáveis
 #' @export
 #' @examples
-#' vars_pam <- tab_vars(1612)
-#' tab_vars(1612) # imprime os classificadores com sua descrição
+#' vars_ipcaq <- tab_vars(1705)
+#' tab_vars(1705) # imprime os classificadores com sua descrição
 
 tab_vars <- function(tabela) {
   tab_meta(tabela)$variaveis

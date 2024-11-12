@@ -13,8 +13,8 @@ tab_vars(tabela)
 Esta função retorna uma lista com variáveis de uma das tabelas da SIDRA.
 }
 \examples{
-vars_pam <- tab_vars(1612)
-tab_vars(1612) # imprime os classificadores com sua descrição
+vars_ipcaq <- tab_vars(1705)
+tab_vars(1705) # imprime os classificadores com sua descrição
 }
 \keyword{IBGE}
 \keyword{SIDRA}

@@ -13,7 +13,7 @@ tab_meta(tabela)
 Esta função retorna uma lista com os ids e o conteúdo da descrição da tabela solicitada.
 }
 \examples{
-desc_PAM <- tab_meta(1612)
+meta_ipcaq <- tab_meta(1705)
 }
 \keyword{IBGE}
 \keyword{SIDRA}

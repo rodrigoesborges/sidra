@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-#' desc_PAM <- tab_meta(1612)
+#' meta_ipcaq <- tab_meta(1705)
 
 # library(rvest)
 

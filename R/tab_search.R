@@ -6,9 +6,10 @@
 #' @keywords IBGE SIDRA dados search
 #' @importFrom dplyr arrange
 #' @export
+#'
 #' @examples
-#' class_pam <- tab_class(1612)
-#' tab_class(1612) # imprime os classificadores com sua descrição
+#' tabs_ipca <- tab_search('IPCA15')
+#' tab_search('IPCA15') # imprime tabelas/agregados/variáveis com o termo pesquisado.
 
 tab_search <- function(termo) {
   df <- sidra::sidrameta
