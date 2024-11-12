@@ -9,3 +9,4 @@
 ^.gitignore
 ^.git
 ^.Rhistory
+^cran-comments\.md$
