@@ -10,3 +10,4 @@
 ^.git
 ^.Rhistory
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
