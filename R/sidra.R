@@ -178,15 +178,15 @@ sidra <- function (tabela, classificador="",
     stop("Erro ao acessar a API do SIDRA.")
   }
 
-  print("parsear json")
+
   # Converter o JSON para um data frame
   json_data <- httr::content(response, "text",encoding="UTF-8")
-  print(json_data)
+
   # Conte\u00fado j\u00e1 verificado
 
   res <- jsonlite::parse_json(json_data)
 
-print(res)
+
   res <-
     tibble::tibble(json=res)|>
     tidyr::unnest_wider("json")|>
