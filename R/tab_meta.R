@@ -33,7 +33,7 @@ tab_meta <- function(tabela) {
   extclass <- \(x=1){
     suppressWarnings(data.table::rbindlist(metatabela$classificacoes[[x]]$categorias))
   }
-  extnclass <- \(x=1){ paste0(metatabela$classificacoes[[x]][c("nome",'id')],collapse="-")}
+  extnclass <- \(x=1){ paste0(metatabela$classificacoes[[x]][c('id',"nome")],collapse="-")}
 
   classificacoes <- lapply(1:length(metatabela$classificacoes),extclass)
   names(classificacoes) <- sapply(1:length(metatabela$classificacoes),extnclass)

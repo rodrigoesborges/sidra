@@ -5,14 +5,14 @@
 #' @keywords IBGE SIDRA dados variáveis
 #' @export
 #' @examples
-#' tabs_a70 <- tab_agrs('A70')
-#' tab_agrs('A70') # imprime os classificadores com sua descrição
+#' tabs_a70 <- tab_agr('A70')
+#' tab_agr('A70') # imprime os classificadores com sua descrição
 #'
 #'
 
 
 ## Função auxiliar
-tab_agrs <- \(agregado) {
+tab_agr <- \(agregado) {
   baseag <- "https://servicodados.ibge.gov.br/api/v3/agregados"
   rc <- substr(agregado,1,1)
   x <- substr(agregado,2,nchar(agregado))
@@ -24,8 +24,9 @@ tab_agrs <- \(agregado) {
     data.table::rbindlist(lapply(seq_along(resp),
                                  \(x) resp[[x]][c("id","nome")]),fill=T,use.names = F))
   tabelas <- try(
-    data.table::rbindlist(lapply(seq_along(resp),
-                                 \(x) resp[[x]]$agregados),fill=T,use.names = F))
+    data.table::rbindlist(unlist(lapply(seq_along(resp),
+                                 \(x) resp[[x]]$agregados),
+                                 recursive=F),fill=T,use.names = F))
   resp <- list(pesquisas=pesquisas,
                tabelas=tabelas)
   return(resp)

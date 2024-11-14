@@ -10,7 +10,7 @@ sidra(
   filtro_cats = "",
   nivel = "N1",
   filtro_niveis,
-  periodo = tab_meta(tabela)$periodicidade$fim,
+  periodo = tab_meta(tabela)$periodos,
   variavel = "all",
   inicio,
   fim,

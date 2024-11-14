@@ -20,7 +20,7 @@ sidra <- function (tabela, classificador="",
                    filtro_cats ="", nivel = "N1",
                    filtro_niveis,
                    periodo =
-                     tab_meta(tabela)$periodicidade$fim, variavel = "all",
+                     tab_meta(tabela)$periodos, variavel = "all",
                    inicio, fim,part=F,printurl=F)
 {
   if (length(tabela) > 1) {
@@ -65,18 +65,20 @@ sidra <- function (tabela, classificador="",
   concav <- \(x) paste0(x,collapse=",")
 
   # Preparação de classificadores e localidades
-  classifs <- if(!missing(filtro_cats)) {
+  classifs <- if(!missing(filtro_cats) & !missing(classificador) & length(classificador)>0) {
     paste0(paste0(classificador,"[",sapply(filtro_cats,concav),"]"),collapse="|")
-  } else if(length(classificador)==0){
+  } else if(!missing(classificador) & length(classificador)!=0){
     paste0(classificador,"[all]",collapse="|")
   } else {
-    classificador
+    paste0(paste0(gsub("[^[:digit:]]","",names(metatab$classificacoes)),
+                  collapse="[all],"),
+           "[all]")
   }
-
+  print(paste(classificador,classifs))
   locais <- if(!missing(filtro_niveis)) {
     paste0(paste0(nivel,"[",sapply(filtro_niveis,concav),"]"),collapse="|")
   } else {
-    paste0(nivel,"[all]",collapse="|")
+    paste0(paste0(nivel,collapse="[all]|"),"[all]")
   }
 
   # Concatenando variáveis de forma otimizada
@@ -114,7 +116,7 @@ sidra <- function (tabela, classificador="",
   } else {
     class_esc <-
     if(classificador!="") {
-      metatab$classificacoes[grepl(paste0("-",classificador,"$"),names(metatab$classificacoes))]
+      metatab$classificacoes[grepl(paste0("^",classificador,"-"),names(metatab$classificacoes))]
       } else {
         metatab$classificacoes
       }
@@ -182,32 +184,29 @@ sidra <- function (tabela, classificador="",
 
   # Conte\u00fado j\u00e1 verificado
 
-  res <- rjson::fromJSON(json_data)
+  res <- jsonlite::parse_json(json_data)
 
   #Transformando json
   arrumado <- \(x) {
-    cbind(id=x$id,variavel=x$variavel,
-                            periodo = names(x$resultados[[1]]$series[[1]]$serie),
-                            do.call(cbind,lapply(1:length(x$resultados),
-                                                 \(y) {
-                                                   df <- data.frame(
-                                                     valor=unlist(x$resultados[[y]]$series[[1]]$serie))
-                                                   names(df) <- paste0(
-                                                     paste0(x$resultados[[y]]$classificacoes[[1]][c("id","nome")],
-                                                            collapse="|"),"|",
-                                                     x$resultados[[y]]$classificacoes[[1]]$categoria[[1]],
-                                                     "|",
-                                                     x$resultados[[y]]$series[[1]]$localidade$nome)
-                                                   df})))|>
-      tidyr::pivot_longer(-(1:3),names_to = c("cod_class","classificador","categoria","local"),
-                          names_sep="\\|",values_to="valor")
+
 
   }
-  res <- data.table::rbindlist(
-    lapply(res,\(x) arrumado(x))
+  res <-
+    tibble(json=res)|>
+    unnest_wider(json)|>
+    unnest_longer(resultados)|>
+    unnest_wider(resultados)|>
+    unnest_longer(classificacoes)|>
+    unnest_wider(classificacoes,names_sep="_")|>
+    unnest_longer(classificacoes_categoria)|>
+    unnest_longer(series)|>
+    unnest_wider(series)|>
+    unnest_wider(c(localidade),names_sep="_")|>
+    unnest_wider(localidade_nivel,names_sep="_")|>unnest_longer(serie)|>
+    rename(valor=serie,periodo=serie_id)|>
+    mutate(across(c(valor,periodo,id,localidade_id,
+                    classificacoes_id,classificacoes_categoria_id),as.numeric))
 
-  )
-  res$valor <- base::suppressWarnings(as.numeric(res$valor))
   return(res)
 
 }

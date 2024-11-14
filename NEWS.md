@@ -1,5 +1,10 @@
 # sidra 0.1.4
 
+* Fixes on sidra function return and optimization for reducing build and test 
+times for CRAN
+
+# sidra 0.1.4
+
 * Fixes for CRAN and added tab_agrs function
 
 # sidra 0.1.3
