@@ -40,9 +40,7 @@ sidra <- function (tabela, classificador="",
   } else if (missing(fim) && !missing(inicio)) {
     metatab$periodos[metatab$periodos >= inicio]
   } else if (missing(inicio) && !missing(fim)) {
-    metatab$periodos[metatab$periodos <= inicio]
-  } else if (length(periodo)>1){
-    paste0(periodo,collapse="|")
+    metatab$periodos[metatab$periodos <= fim]
   } else {
     periodo
   }
@@ -74,7 +72,7 @@ sidra <- function (tabela, classificador="",
                   collapse="[all],"),
            "[all]")
   }
-  print(paste(classificador,classifs))
+
   locais <- if(!missing(filtro_niveis)) {
     paste0(paste0(nivel,"[",sapply(filtro_niveis,concav),"]"),collapse="|")
   } else {
@@ -100,16 +98,17 @@ sidra <- function (tabela, classificador="",
   if(printurl){print(url)}
 
   # C\u00e1lculo do tamanho da requisi\u00e7\u00e3o:
-  ntemps <- if(is.character(periodo) && !grepl("-",periodo[1])) {
+
+  ntemps <- if(is.character(periodo) && !grepl("-",periodo[1]) & length(periodo>1)) {
     length(periodo)
-  } else if (length(periodo)>1){
-    length(metatab$periodos[metatab$periodos >=inicio & metatab$periodos<=fim])
-  } else if (grepl("-",periodo[1])) {
+    } else if (grepl("-",periodo[1])) {
     length(metatab$periodos[metatab$periodos >=substr(periodo[1],1,6) & metatab$periodos<=substr(periodo[1],8,nchar(periodo))])
+  } else if (grepl("|",periodo[1])){
+    length(strsplit(as.character(periodo),"|",fixed = T))
   } else {
     length(metatab$periodos)
   }
-
+  periodo <- paste0(periodo,collapse="|")
   # Definindo ncats
   ncats <- if(!missing(filtro_cats)){
     sum(sapply(filtro_cats,length),na.rm=T)
@@ -143,7 +142,7 @@ sidra <- function (tabela, classificador="",
 
   # Calculando tamanho da consulta e particionando se necessário
   tamanho <- ifelse(part==T,0,nvars*ntemps*nlocs*ncats)
-  print(tamanho)
+
   if (tamanho>1e5) {
     message(paste(
       "A consulta exceder\u00e1 o limite de 100.000 permitido pela API.",
@@ -155,12 +154,12 @@ sidra <- function (tabela, classificador="",
 
     cada <- periodos |> split(cut(seq_along(periodos), requisicoes)) |>
       lapply(range) |> sapply(paste0, collapse = "-")
-  print(cada)
+
   fnvl <- ifelse(missing(filtro_niveis),"",filtro_niveis)
   fcats <- ifelse(missing(filtro_cats),"",filtro_cats)
 
     res <- lapply(cada, \(x) {sidra(
-           tabela = tabela, classificador = classificador,
+           tabela = tabela, classificador = classifs,
            filtro_cats = filtro_cats, nivel = nivel,
            filtro_niveis = fnvl,
            periodo= x,
@@ -192,20 +191,20 @@ sidra <- function (tabela, classificador="",
 
   }
   res <-
-    tibble(json=res)|>
-    unnest_wider(json)|>
-    unnest_longer(resultados)|>
-    unnest_wider(resultados)|>
-    unnest_longer(classificacoes)|>
-    unnest_wider(classificacoes,names_sep="_")|>
-    unnest_longer(classificacoes_categoria)|>
-    unnest_longer(series)|>
-    unnest_wider(series)|>
-    unnest_wider(c(localidade),names_sep="_")|>
-    unnest_wider(localidade_nivel,names_sep="_")|>unnest_longer(serie)|>
-    rename(valor=serie,periodo=serie_id)|>
-    mutate(across(c(valor,periodo,id,localidade_id,
-                    classificacoes_id,classificacoes_categoria_id),as.numeric))
+    tibble::tibble(json=res)|>
+    tidyr::unnest_wider("json")|>
+    tidyr::unnest_longer("resultados")|>
+    tidyr::unnest_wider("resultados")|>
+    tidyr::unnest_longer("classificacoes")|>
+    tidyr::unnest_wider("classificacoes",names_sep="_")|>
+    tidyr::unnest_longer("classificacoes_categoria")|>
+    tidyr::unnest_longer("series")|>
+    tidyr::unnest_wider("series")|>
+    tidyr::unnest_wider("localidade",names_sep="_")|>
+    tidyr::unnest_wider("localidade_nivel",names_sep="_")|>tidyr::unnest_longer("serie")|>
+    dplyr::rename(valor="serie",periodo="serie_id")|>
+    suppressWarnings(dplyr::mutate(dplyr::across(c("valor","periodo","id","localidade_id",
+                    "classificacoes_id","classificacoes_categoria_id"),as.numeric)))
 
   return(res)
 

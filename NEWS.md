@@ -1,4 +1,4 @@
-# sidra 0.1.4
+# sidra 0.1.5
 
 * Fixes on sidra function return and optimization for reducing build and test 
 times for CRAN
