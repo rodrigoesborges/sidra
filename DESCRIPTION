@@ -7,7 +7,6 @@ Authors@R: person(given = "Rodrigo Emmanuel",
                     role = c("cre","aut"),
                     email = "rodrigo@borges.net.br",
                     comment = "affiliation - Distintive Lab & UnDF")
-Maintainer: Rodrigo Emmanuel Santana Borges <rodrigo@borges.net.br>
 Description: Ferramentas para acessar e manipular dados via API do SIDRA do IBGE.
 License: GPL-3
 Language: pt-BR
