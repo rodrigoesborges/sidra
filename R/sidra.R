@@ -87,15 +87,6 @@ sidra <- function (tabela, classificador="",
   } else {variavel}
 
 
-  #Construindo URL
-  base_url <- "https://servicodados.ibge.gov.br/api/v3/agregados/"
-  url <- gsub("\\[\\]","",paste0(base_url, tabela,
-                "/periodos/", periodo,
-                "/variaveis/", variavel,
-                "?classificacao=", classifs,
-                "&localidades=", locais))
-
-  if(printurl){print(url)}
 
   # C\u00e1lculo do tamanho da requisi\u00e7\u00e3o:
 
@@ -142,6 +133,15 @@ sidra <- function (tabela, classificador="",
 
   # Calculando tamanho da consulta e particionando se necessário
   tamanho <- ifelse(part==T,0,nvars*ntemps*nlocs*ncats)
+  #Construindo URL
+  base_url <- "https://servicodados.ibge.gov.br/api/v3/agregados/"
+  url <- gsub("\\[\\]","",paste0(base_url, tabela,
+                                 "/periodos/", periodo,
+                                 "/variaveis/", variavel,
+                                 "?classificacao=", classifs,
+                                 "&localidades=", locais))
+
+  if(printurl){print(url)}
 
   if (tamanho>1e5) {
     message(paste(
@@ -178,18 +178,15 @@ sidra <- function (tabela, classificador="",
     stop("Erro ao acessar a API do SIDRA.")
   }
 
+  print("parsear json")
   # Converter o JSON para um data frame
   json_data <- httr::content(response, "text",encoding="UTF-8")
-
+  print(json_data)
   # Conte\u00fado j\u00e1 verificado
 
   res <- jsonlite::parse_json(json_data)
 
-  #Transformando json
-  arrumado <- \(x) {
-
-
-  }
+print(res)
   res <-
     tibble::tibble(json=res)|>
     tidyr::unnest_wider("json")|>
