@@ -20,4 +20,5 @@ Para utilização inicial, base com todos agregados disponíveis
 data(agregados)
 
 }
-\keyword{metadados,agregados}
+\keyword{agregados}
+\keyword{metadados}

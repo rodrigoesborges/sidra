@@ -22,4 +22,5 @@ Para utilização inicial, base com todos agregados disponíveis
 data(sidrameta)
 
 }
-\keyword{metadados,agregados}
+\keyword{agregados}
+\keyword{metadados}
