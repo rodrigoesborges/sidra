@@ -6,7 +6,7 @@
 #' @usage data(agregados)
 #' @usage data(sidrameta)
 #'
-#' @keywords metadados,agregados
+#' @keywords metadados agregados
 #'
 #' @source \href{https://servicodados.ibge.gov.br/api/v3/agregados/}{IBGE API}
 #'
