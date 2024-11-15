@@ -203,8 +203,9 @@ sidra <- function (tabela, classificador="",
     suppressWarnings(dplyr::mutate(dplyr::across(c("valor","periodo","id","localidade_id",
                     "classificacoes_id","classificacoes_categoria_id"),as.numeric)))|>
     tidyr::pivot_wider(
-      names_from = c(paste0("c","classificacoes_id"),"classificacoes_categoria_id","classificacoes_categoria"),
-      names_sep = "-",values_from=valor)|>select(-c("classificacoes_nome"))
+      names_from = c("classificacoes_id","classificacoes_categoria_id","classificacoes_categoria"),
+      names_sep = "-",names_prefix = "c",values_from=valor)|>
+    dplyr::select(-c("classificacoes_nome"))
 
   return(res)
 
