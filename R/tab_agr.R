@@ -18,7 +18,6 @@ tab_agr <- \(agregado) {
   x <- substr(agregado,2,nchar(agregado))
   rota <- sidra::agregados[sidra::agregados$id==rc,]$rota
   url <- paste0(baseag,"?",rota,"=",x)
-  print(url)
   resp <- httr::content(httr::GET(url))
   pesquisas <- try(
     data.table::rbindlist(lapply(seq_along(resp),

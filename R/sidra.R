@@ -201,7 +201,10 @@ sidra <- function (tabela, classificador="",
     tidyr::unnest_wider("localidade_nivel",names_sep="_")|>tidyr::unnest_longer("serie")|>
     dplyr::rename(valor="serie",periodo="serie_id")|>
     suppressWarnings(dplyr::mutate(dplyr::across(c("valor","periodo","id","localidade_id",
-                    "classificacoes_id","classificacoes_categoria_id"),as.numeric)))
+                    "classificacoes_id","classificacoes_categoria_id"),as.numeric)))|>
+    tidyr::pivot_wider(
+      names_from = c(paste0("c","classificacoes_id"),"classificacoes_categoria_id","classificacoes_categoria"),
+      names_sep = "-",values_from=valor)|>select(-c("classificacoes_nome"))
 
   return(res)
 
