@@ -204,7 +204,7 @@ sidra <- function (tabela, classificador="",
                     "classificacoes_id","classificacoes_categoria_id"),as.numeric)))|>
     tidyr::pivot_wider(
       names_from = c("classificacoes_id","classificacoes_categoria_id","classificacoes_categoria"),
-      names_sep = "-",names_prefix = "c",values_from=valor)|>
+      names_sep = "-",names_prefix = "c",values_from="valor")|>
     dplyr::select(-c("classificacoes_nome"))
 
   return(res)

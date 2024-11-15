@@ -5,7 +5,7 @@
 #' @docType data
 #' @usage data(agregados)
 #'
-#' @keywords metadados,agregados
+#' @keywords metadados agregados
 #'
 #' @source \href{https://servicodados.ibge.gov.br/api/v3/agregados/}{IBGE API}
 #'
