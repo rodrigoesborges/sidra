@@ -6,8 +6,7 @@
 
 * Fixed all notes except for that indicating that it's a new submission, which
 it is, and as per online research could be ignored:
-Results of check_win_devel() in https://win-builder.r-project.org/5yzTXH0n1iYG/00check.log
-
+Results of check_win_devel() in https://win-builder.r-project.org/pn1q17x5jcER
 
 
 * Adjusted my name to include full name and full surname 
