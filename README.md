@@ -10,7 +10,8 @@ status](https://www.r-pkg.org/badges/version/sidra)](https://CRAN.R-project.org/
 [![codecov](https://codecov.io/gh/rodrigoesborges/sidra/graph/badge.svg?token=7B3AMAQYHS)](https://app.codecov.io/gh/rodrigoesborges/sidra)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-\# Introdução
+
+# Introdução
 
 O pacote `sidra` fornece uma interface simples para acessar a API de
 dados do SIDRA (Sistema IBGE de Recuperação Automática), permitindo que

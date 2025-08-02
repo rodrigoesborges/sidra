@@ -22,6 +22,7 @@ library(sidra)
 [![check](https://github.com/rodrigoesborges/sidra/actions/workflows/check.yaml/badge.svg)](https://github.com/rodrigoesborges/sidra/actions/workflows/check.yaml)
 [![codecov](https://codecov.io/gh/rodrigoesborges/sidra/graph/badge.svg?token=7B3AMAQYHS)](https://app.codecov.io/gh/rodrigoesborges/sidra)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+
 # Introdução
 
 O pacote `sidra` fornece uma interface simples para acessar a API de dados do SIDRA (Sistema IBGE de Recuperação Automática), permitindo que você consulte dados do IBGE diretamente do R, **a partir da api rest tornada disponível em [servicodados.ibge.gov.br](https://servicodados.ibge.gov.br/api/docs/agregados?versao=3)**.
