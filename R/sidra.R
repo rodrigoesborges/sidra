@@ -11,6 +11,9 @@
 #' @param inicio,fim Início e fim do período desejado.
 #' @param part interno para quando é preciso fazer várias requisições
 #' @param printurl imprime url construído para transparência e debugging
+#' @return Um `data.frame` (`tibble`) contendo os dados solicitados da tabela SIDRA. A estrutura do \code{data.frame} está em formato amplo (wide),
+#' onde cada linha geralmente corresponde a um nível geográfico e período de tempo específico. As colunas incluem detalhes sobre a localidade, o período e as variáveis,
+#' com as categorias de classificação transformadas em colunas separadas.
 #' @keywords IBGE SIDRA dados
 #' @export
 #' @examples
@@ -21,7 +24,7 @@ sidra <- function (tabela, classificador="",
                    filtro_niveis,
                    periodo =
                      tab_meta(tabela)$periodos, variavel = "all",
-                   inicio, fim,part=F,printurl=F)
+                   inicio, fim,part=FALSE,printurl=TRUE)
 {
   if (length(tabela) > 1) {
     stop("Solicite os dados de uma tabela por vez. Para mais de uma use fun\u00e7\u00f5es da fam\u00edlia apply",

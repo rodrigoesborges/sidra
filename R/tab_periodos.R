@@ -2,11 +2,12 @@
 #'
 #' Esta função retorna uma lista com periodos de uma das tabelas da SIDRA.
 #' @param tabela Número da tabela.
+#' @return um vetor `integer` ou `character` com os períodos disponíveis da tabela solicitada
 #' @keywords IBGE SIDRA dados periodos
 #' @export
 #' @examples
 #' periodos_ipcaq <- tab_periodos(1705)
-#' tab_periodos(1705) # imprime os classificadores com sua descrição
+#' tab_periodos(1705) # imprime os períodos disponíveis da tabela
 
 tab_periodos <- function(tabela) {
   tab_meta(tabela)$periodos

@@ -7,7 +7,15 @@
 tab_search(termo)
 }
 \arguments{
-\item{termo}{Termo.}
+\item{termo}{Termo a buscar.}
+}
+\value{
+um `data.frame` (especificamente um `data.table`) com as colunas:
+\itemize{
+  \item{\code{id}: um vetor com os ids das tabelas em que termo encontrado}
+  \item{\code{literal}: o texto onde ocorreu match}
+  \item{\code{agregacao}: codigo string da agregação, cf. `tab_agr()`.}
+}
 }
 \description{
 Esta função retorna uma lista com agregados, tabelas ou variáveis da SIDRA

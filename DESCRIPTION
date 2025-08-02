@@ -1,13 +1,18 @@
 Package: sidra
 Type: Package
-Title: Acesso aos Dados do SIDRA/IBGE via servicodados.ibge.gov.br
-Version: 0.1.5
+Title: Acesso aos Dados do 'SIDRA' do IBGE
+Version: 0.1.6
 Authors@R: person(given = "Rodrigo Emmanuel", 
                     family = "Santana Borges",
-                    role = c("cre","aut"),
+                    role = c("cre","aut","cph"),
                     email = "rodrigo@borges.net.br",
                     comment = "affiliation - Distintive Lab & UnDF")
-Description: Ferramentas para acessar e manipular dados via API do SIDRA do IBGE.
+Description: Functions for accessing and manipulating data from Brazilian 
+    Institute of Geography and Statistics (IBGE)'s API 'SIDRA' (acronym for IBGE 
+    System of Automatic Retrieval) from the new endpoints 
+    at <https://servicodados.ibge.gov.br>. Ferramentas para acessar 
+    e manipular dados via API do Sistema IBGE De Recuperação Automática 'SIDRA'  
+    do Instituto Brasileiro de Geografia e Estatística (IBGE).
 License: GPL-3
 Language: pt-BR
 Encoding: UTF-8

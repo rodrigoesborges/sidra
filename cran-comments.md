@@ -1,13 +1,15 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* fixed using TRUE and FALSE instead of T and F in sidra.R
+* added @return and therefore \value in all function Rd as requested
+* provided english translation of description, starting with it
+* added web reference for the API in <https:...> form
+* wrote api name in single quotes
+* explained acronyms in DESCRIPTION
+
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
 
 * This is a new release.
-
-* Fixed all notes except for that indicating that it's a new submission, which
-it is, and as per online research could be ignored:
-Results of check_win_devel() in https://win-builder.r-project.org/pn1q17x5jcER
-
-
-* Adjusted my name to include full name and full surname 
-(Rodrigo Borges -> Rodrigo Emmanuel Santana Borges)

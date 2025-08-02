@@ -9,12 +9,16 @@ tab_fonte(tabela)
 \arguments{
 \item{tabela}{Número da tabela.}
 }
+\value{
+uma `string` (vetor de caracteres de comprimento 1) com o nome da fonte
+dos dados da tabela solicitada
+}
 \description{
-Esta função retorna a fontede uma das tabelas da SIDRA.
+Esta função retorna a fonte de uma das tabelas da SIDRA.
 }
 \examples{
 fonte_ipcaq <- tab_fonte(1705)
-tab_fonte(1705) # imprime os classificadores com sua descrição
+tab_fonte(1705) # imprime o nome da fonte
 }
 \keyword{IBGE}
 \keyword{SIDRA}

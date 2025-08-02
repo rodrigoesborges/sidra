@@ -2,11 +2,16 @@
 #'
 #' Esta função retorna uma lista com Todas as tabelas para  agregado indicado
 #' @param agregado Número do agregado.
+#' @return Uma lista contendo dois `data.table`s:
+#' \itemize{
+#'   \item{\code{pesquisas}: Um `data.table` com o ID e o nome das pesquisas relacionadas.}
+#'   \item{\code{tabelas}: Um `data.table` com o ID e o nome das tabelas (agregados) disponíveis para a consulta indicada.}
+#' }
 #' @keywords IBGE SIDRA dados variáveis
 #' @export
 #' @examples
 #' tabs_a70 <- tab_agr('A70')
-#' tab_agr('A70') # imprime os classificadores com sua descrição
+#' tab_agr('A70') # imprime os agregados com sua descrição
 #'
 #'
 

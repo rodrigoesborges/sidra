@@ -1,3 +1,7 @@
+# sidra 0.1.6
+
+* Fixes documentation of functions and DESCRIPTION for resubmitting to CRAN
+
 # sidra 0.1.5
 
 * Fixes on sidra function return and optimization for reducing build and test 

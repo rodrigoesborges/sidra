@@ -9,6 +9,9 @@ tab_class(tabela)
 \arguments{
 \item{tabela}{Número da tabela.}
 }
+\value{
+uma lista de `data.frame`s, onde cada um representa um classificador e suas categorias.
+}
 \description{
 Esta função retorna uma lista com classificadores de uma das tabelas da SIDRA.
 }

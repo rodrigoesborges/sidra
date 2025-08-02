@@ -9,12 +9,15 @@ tab_periodos(tabela)
 \arguments{
 \item{tabela}{Número da tabela.}
 }
+\value{
+um vetor `integer` ou `character` com os períodos disponíveis da tabela solicitada
+}
 \description{
 Esta função retorna uma lista com periodos de uma das tabelas da SIDRA.
 }
 \examples{
 periodos_ipcaq <- tab_periodos(1705)
-tab_periodos(1705) # imprime os classificadores com sua descrição
+tab_periodos(1705) # imprime os períodos disponíveis da tabela
 }
 \keyword{IBGE}
 \keyword{SIDRA}

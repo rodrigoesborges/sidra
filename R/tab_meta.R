@@ -4,6 +4,14 @@
 #' @param tabela Número da tabela.
 #' @keywords IBGE SIDRA dados metadados
 #' @importFrom data.table rbindlist
+#' @return Uma `lista` contendo os metadados da tabela solicitada. A lista inclui elementos como:
+#' \itemize{
+#'   \item{\code{nivelTerritorial}: um vetor com os níveis territoriais disponíveis.}
+#'   \item{\code{variaveis}: um `data.frame` com as variáveis da tabela.}
+#'   \item{\code{periodos}: um vetor com os períodos disponíveis.}
+#'   \item{\code{classificacoes}: uma lista de `data.frame`s, onde cada um representa um classificador e suas categorias.}
+#'   \item{Outros metadados diversos da tabela, como nome, pesquisa, assunto, etc.}
+#' }
 #' @export
 #'
 #' @examples

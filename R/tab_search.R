@@ -2,7 +2,13 @@
 #'
 #' Esta função retorna uma lista com agregados, tabelas ou variáveis da SIDRA
 #' que possuem o termo buscado.
-#' @param termo Termo.
+#' @param termo Termo a buscar.
+#' @return um `data.frame` (especificamente um `data.table`) com as colunas:
+#' \itemize{
+#'   \item{\code{id}: um vetor com os ids das tabelas em que termo encontrado}
+#'   \item{\code{literal}: o texto onde ocorreu match}
+#'   \item{\code{agregacao}: codigo string da agregação, cf. `tab_agr()`.}
+#' }
 #' @keywords IBGE SIDRA dados search
 #' @importFrom dplyr arrange
 #' @export

@@ -9,6 +9,15 @@ tab_vars(tabela)
 \arguments{
 \item{tabela}{Número da tabela.}
 }
+\value{
+um `data.frame` (`data.table`) com as seguintes colunas:
+\itemize{
+  \item{\code{id}: ids dos indicadores}
+  \item{\code{nome}: nome dos indicadores}
+  \item{\code{unidade}: unidade de medida do indicador.}
+  \item{\code{sumarizacao}: tipo de agregação.}
+}
+}
 \description{
 Esta função retorna uma lista com variáveis de uma das tabelas da SIDRA.
 }

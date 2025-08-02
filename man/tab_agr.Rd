@@ -9,12 +9,19 @@ tab_agr(agregado)
 \arguments{
 \item{agregado}{Número do agregado.}
 }
+\value{
+Uma lista contendo dois `data.table`s:
+\itemize{
+  \item{\code{pesquisas}: Um `data.table` com o ID e o nome das pesquisas relacionadas.}
+  \item{\code{tabelas}: Um `data.table` com o ID e o nome das tabelas (agregados) disponíveis para a consulta indicada.}
+}
+}
 \description{
 Esta função retorna uma lista com Todas as tabelas para  agregado indicado
 }
 \examples{
 tabs_a70 <- tab_agr('A70')
-tab_agr('A70') # imprime os classificadores com sua descrição
+tab_agr('A70') # imprime os agregados com sua descrição
 
 
 }

@@ -19,6 +19,13 @@ básicos para ajudá-lo a começar.
 
 # Instalação
 
+O pacote foi submetido ao CRAN, uma vez aceito pode instalar a versão
+CRAN com:
+
+``` r
+install.packages("sidra")
+```
+
 Para instalar o pacote diretamente do GitHub, utilize o código abaixo:
 
 ``` r

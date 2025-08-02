@@ -3,15 +3,19 @@
 #' Esta função retorna uma lista com níveis territoriais disponíveis
 #' de uma das tabelas da SIDRA.
 #' @param tabela Número da tabela.
+#' @return Um `data.frame` (especificamente, um `data.table`) que lista todas as
+#'  localidades disponíveis para a tabela, detalhando o ID e o nome de cada
+#'  localidade, bem como o ID e o nome do nível geográfico correspondente
+#'  (ex: 'N3' para "Unidade da Federação").
 #' @keywords IBGE SIDRA dados localidade
 #' @export
 #' @examples
 #' niveis_ipca15 <- tab_niveis(1705)
-#' tab_niveis(1705) # imprime os classificadores com sua descrição
+#' tab_niveis(1705) # imprime os níveis territoriais da tabela solicitada
 
 tab_niveis <- function(tabela) {
   niveis <- tab_meta(tabela)$nivelTerritorial
-
+  niveis <- rev(niveis[!grepl("N7",niveis)])
   baseref <- paste0("https://servicodados.ibge.gov.br/api/v3/agregados/", tabela)
 
   rota <- paste0(baseref,"/localidades/",paste0(niveis,collapse="|"))

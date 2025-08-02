@@ -14,8 +14,8 @@ sidra(
   variavel = "all",
   inicio,
   fim,
-  part = F,
-  printurl = F
+  part = FALSE,
+  printurl = TRUE
 )
 }
 \arguments{
@@ -38,6 +38,11 @@ sidra(
 \item{part}{interno para quando é preciso fazer várias requisições}
 
 \item{printurl}{imprime url construído para transparência e debugging}
+}
+\value{
+Um `data.frame` (`tibble`) contendo os dados solicitados da tabela SIDRA. A estrutura do \code{data.frame} está em formato amplo (wide),
+onde cada linha geralmente corresponde a um nível geográfico e período de tempo específico. As colunas incluem detalhes sobre a localidade, o período e as variáveis,
+com as categorias de classificação transformadas em colunas separadas.
 }
 \description{
 Esta função retorna a tabela solicitada em formato data.frame.
