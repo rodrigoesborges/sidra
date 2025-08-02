@@ -4,9 +4,13 @@ Rodrigo E. S. Borges
 
 # sidra <img src='man/figures/logo.png' align="right" height="139" />
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/sidra)](https://CRAN.R-project.org/package=sidra)
+[![check](https://github.com/rodrigoesborges/sidra/actions/workflows/check.yaml/badge.svg)](https://github.com/rodrigoesborges/sidra/actions/workflows/check.yaml)
 [![codecov](https://codecov.io/gh/rodrigoesborges/sidra/graph/badge.svg?token=7B3AMAQYHS)](https://app.codecov.io/gh/rodrigoesborges/sidra)
-
-# Introdução
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+\# Introdução
 
 O pacote `sidra` fornece uma interface simples para acessar a API de
 dados do SIDRA (Sistema IBGE de Recuperação Automática), permitindo que

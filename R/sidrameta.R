@@ -8,7 +8,7 @@
 #'
 #' @keywords metadados agregados
 #'
-#' @source \href{https://servicodados.ibge.gov.br/api/v3/agregados/}{IBGE API}
+#' @source \href{https://servicodados.ibge.gov.br/api/docs/agregados?versao=3}{IBGE API}
 #'
 #' @examples
 #' data(sidrameta)
