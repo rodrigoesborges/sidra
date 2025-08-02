@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   sidra: sidra.html
-last_built: 2025-08-02T02:50Z
+last_built: 2025-08-02T02:59Z
 urls:
   reference: https://rodrigoesborges.github.io/sidra/reference
   article: https://rodrigoesborges.github.io/sidra/articles
