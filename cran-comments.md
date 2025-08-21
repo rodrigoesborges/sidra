@@ -1,6 +1,11 @@
 ## Resubmission
 This is a resubmission of the 'sidra' package.
 
+ * Fixed example and test errors when servicodados.ibge.gov.br is not accessible by:
+ * Adding a helper function that exits gracefully if no access to URL
+ * calling the helper function when appropriate to avoid errors
+ * additionally a short timeout was set to pass tests < 5sec
+
 ## R CMD check results
 
 There were no ERRORs or WARNINGs.
