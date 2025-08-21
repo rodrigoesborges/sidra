@@ -1,7 +1,7 @@
 Package: sidra
 Type: Package
 Title: Acesso aos Dados do 'SIDRA' do IBGE
-Version: 0.1.6
+Version: 0.1.7
 Authors@R: person(given = "Rodrigo Emmanuel", 
                     family = "Santana Borges",
                     role = c("cre","aut","cph"),

@@ -1,3 +1,7 @@
+# sidra 0.1.7
+
+* Added helper function and api url check handling with graceful exit if no access
+
 # sidra 0.1.6
 
 * Fixes documentation of functions and DESCRIPTION for resubmitting to CRAN
