@@ -23,7 +23,7 @@ tab_niveis <- \(tabela) {
 
   rota <- paste0(baseref,"/localidades/",paste0(niveis,collapse="|"))
 
-  resp <- sidra:::call_ibge(httr::GET(rota))
+  resp <- call_ibge(httr::GET(rota))
   if (is.null(resp)) {
     return(invisible(NULL))
   }

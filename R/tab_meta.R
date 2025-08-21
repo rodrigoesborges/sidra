@@ -27,7 +27,7 @@ tab_meta <- \(tabela) {
 
   rota <- paste0(baseref,"/metadados")
 
-  resp <- sidra:::call_ibge({httr::GET(rota)})
+  resp <- call_ibge({httr::GET(rota)})
 
   if (is.null(resp)){
     return(invisible(NULL))
