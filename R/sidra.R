@@ -176,7 +176,7 @@ sidra <- function (tabela, classificador="",
 
 
   # Fazer a requisi\u00e7\u00e3o GET
-  response <- httr::GET(url)
+  response <- call_ibge({httr::GET(url,config = httr::timeout(2))})
 
   # verificação do conteúdo
   # Checar se a requisição foi bem-sucedida

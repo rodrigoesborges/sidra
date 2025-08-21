@@ -23,7 +23,7 @@ tab_niveis <- \(tabela) {
 
   rota <- paste0(baseref,"/localidades/",paste0(niveis,collapse="|"))
 
-  resp <- call_ibge(httr::GET(rota))
+  resp <- call_ibge(httr::GET(rota,config = httr::timeout(2)))
   if (is.null(resp)) {
     return(invisible(NULL))
   }

@@ -23,7 +23,7 @@ tab_agr <- \(agregado) {
   x <- substr(agregado,2,nchar(agregado))
   rota <- sidra::agregados[sidra::agregados$id==rc,]$rota
   url <- paste0(baseag,"?",rota,"=",x)
-  resp <- call_ibge({httr::GET(url)})
+  resp <- call_ibge({httr::GET(url,config = httr::timeout(2))})
   if (is.null(resp)){
     return(invisible(NULL))
   }

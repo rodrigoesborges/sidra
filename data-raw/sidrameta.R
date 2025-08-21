@@ -5,7 +5,10 @@
 
 agregacao <- \(x="A"){
   baseag <- "https://servicodados.ibge.gov.br/api/v3/agregados"
-  resp <- httr::GET(paste0(baseag,"?acervo=",x))
+  resp <- call_ibge(httr::GET(paste0(baseag,"?acervo=",x),config = httr::timeout(2)))
+  if (is.null(resp)){
+    return(invisible(NULL))
+  }
   conteudo <- httr::content(resp)
   agregado <- data.table::rbindlist(lapply(1:length(conteudo),\(x) as.data.frame(conteudo[[x]])))
   agregado$agregacao <- x
