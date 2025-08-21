@@ -11,5 +11,9 @@
 #' tab_fonte(1705) # imprime o nome da fonte
 
 tab_fonte <- function(tabela) {
-  tab_meta(tabela)$pesquisa
+  basedf <- tab_meta(tabela)
+  if (is.null(basedf)){
+    return(invisible(NULL))
+  }
+  basedf$pesquisa
 }

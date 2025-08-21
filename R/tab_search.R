@@ -19,6 +19,9 @@
 
 tab_search <- function(termo) {
   df <- sidra::sidrameta
+  if(is.null(df)){
+    return(invisible(NULL))
+  }
   resp <- df[grepl(termo,df[[2]],ignore.case=T)|grepl(termo,df[[4]],ignore.case=T),c("id","literal","agregacao")]|>
     dplyr::arrange("id")
   resp[[3]] <- resp[[3]]=="V"

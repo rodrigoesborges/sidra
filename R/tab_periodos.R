@@ -10,6 +10,10 @@
 #' tab_periodos(1705) # imprime os períodos disponíveis da tabela
 
 tab_periodos <- function(tabela) {
-  tab_meta(tabela)$periodos
+  basedf <- tab_meta(tabela)
+  if (is.null(basedf)) {
+    return(invisible(NULL))
+  }
+  basedf$periodos
 
 }

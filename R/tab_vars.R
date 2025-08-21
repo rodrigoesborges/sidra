@@ -16,6 +16,10 @@
 #' tab_vars(1705) # imprime os classificadores com sua descrição
 
 tab_vars <- function(tabela) {
-  tab_meta(tabela)$variaveis
+  basedf <- tab_meta(tabela)
+  if (is.null(basedf)){
+    return(invisible(NULL))
+  }
+  basedf$variaveis
 
 }

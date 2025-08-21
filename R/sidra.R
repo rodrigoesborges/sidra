@@ -36,6 +36,9 @@ sidra <- function (tabela, classificador="",
 
   ##obtendo metadados única vez
   metatab <- tab_meta(tabela)
+  if (is.null(metatab)){
+    return(invisible(NULL))
+  }
 
   #Determinação do período de forma vetorizada
   periodo <-   if (!missing(inicio) && !missing(fim)) {

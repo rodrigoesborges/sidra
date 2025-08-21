@@ -17,7 +17,7 @@ License: GPL-3
 Language: pt-BR
 Encoding: UTF-8
 LazyData: true
-Imports: httr,data.table,tidyr,dplyr,jsonlite,tibble
+Imports: httr,data.table,tidyr,dplyr,jsonlite,tibble,RCurl
 Depends: 
     R (>= 4.1.0)
 RoxygenNote: 7.3.2

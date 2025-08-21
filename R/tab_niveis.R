@@ -13,14 +13,20 @@
 #' niveis_ipca15 <- tab_niveis(1705)
 #' tab_niveis(1705) # imprime os níveis territoriais da tabela solicitada
 
-tab_niveis <- function(tabela) {
+tab_niveis <- \(tabela) {
   niveis <- tab_meta(tabela)$nivelTerritorial
+  if (is.null(niveis)) {
+    return(invisible(NULL))
+  }
   niveis <- rev(niveis[!grepl("N7",niveis)])
   baseref <- paste0("https://servicodados.ibge.gov.br/api/v3/agregados/", tabela)
 
   rota <- paste0(baseref,"/localidades/",paste0(niveis,collapse="|"))
 
-  resp <- httr::GET(rota)
+  resp <- call_ibge(httr::GET(rota))
+  if (is.null(resp)) {
+    return(invisible(NULL))
+  }
 
   nivtab <- httr::content(resp)
 

@@ -9,7 +9,12 @@
 #' class_ipcaq <- tab_class(1705)
 #' tab_class(1705) # imprime os classificadores com sua descrição
 
-tab_class <- function(tabela) {
-  tab_meta(tabela)$classificacoes
+tab_class <- \(tabela) {
+  basedf <- tab_meta(tabela)
+  if (is.null(basedf)){
+    return(invisible(NULL))
+  }
+
+  basedf$classificacoes
 
 }

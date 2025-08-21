@@ -19,7 +19,7 @@
 
 # library(rvest)
 
-tab_meta <- function(tabela) {
+tab_meta <- \(tabela) {
 
 
 
@@ -27,7 +27,11 @@ tab_meta <- function(tabela) {
 
   rota <- paste0(baseref,"/metadados")
 
-  resp <- httr::GET(rota)
+  resp <- call_ibge({httr::GET(rota)})
+
+  if (is.null(resp)){
+    return(invisible(NULL))
+  }
 
 
   metatabela <- httr::content(resp)

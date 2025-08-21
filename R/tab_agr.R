@@ -23,7 +23,12 @@ tab_agr <- \(agregado) {
   x <- substr(agregado,2,nchar(agregado))
   rota <- sidra::agregados[sidra::agregados$id==rc,]$rota
   url <- paste0(baseag,"?",rota,"=",x)
-  resp <- httr::content(httr::GET(url))
+  resp <- call_ibge({httr::GET(url)})
+  if (is.null(resp)){
+    return(invisible(NULL))
+  }
+
+  resp <- httr::content(resp)
   pesquisas <- try(
     data.table::rbindlist(lapply(seq_along(resp),
                                  \(x) resp[[x]][c("id","nome")]),fill=T,use.names = F))
