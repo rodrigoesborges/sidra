@@ -65,51 +65,11 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">tabs_a70</span> <span class="op">&lt;-</span> <span class="fu">tab_agr</span><span class="op">(</span><span class="st">'A70'</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The API at https://servicodados.ibge.gov.br could not be reached.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Please check your internet connection and access to IBGE ibge.gov.br or try again later.</span>
 <span class="r-in"><span><span class="fu">tab_agr</span><span class="op">(</span><span class="st">'A70'</span><span class="op">)</span> <span class="co"># imprime os agregados com sua descrição</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $pesquisas</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        id                                    nome</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;char&gt;                                  &lt;char&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:     AB     Pesquisa Mensal de Abate de Animais</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:     AX Pesquisa Trimestral do Abate de Animais</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $tabelas</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;char&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:     19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:     20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:     41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:     42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:     43</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:     44</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:     45</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:     46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:     47</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:     48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11:   1092</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12:   1093</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13:   1094</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14:   6669</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15:   6829</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16:   9395</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                                                   nome</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                                                 &lt;char&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1:                                                                                                                                   Quantidade de outros animais de criação abatidos</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2:                                                                                                                            Peso das carcaças de outros animais de criação abatidos</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3:                                                                                                                                                     Quantidade de bovinos abatidos</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4:                                                                                                                                                      Quantidade de suínos abatidos</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5:                                                                                                                                                    Quantidade de equídeos abatidos</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6:                                                                                                                                                        Quantidade de aves abatidas</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7:                                                                                                                                              Peso das carcaças de bovinos abatidos</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8:                                                                                                                                               Peso das carcaças de suínos abatidos</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9:                                                                                                                                             Peso das carcaças de equídeos abatidos</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10:                                                                                                                                                 Peso das carcaças de aves abatidas</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11:                                    Número de informantes, Quantidade e Peso total das carcaças dos bovinos abatidos, no mês e no trimestre, por tipo de rebanho e tipo de inspeção</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12:                                                       Número de informantes, Quantidade e Peso total das carcaças dos suínos abatidos, no mês e no trimestre, por tipo de inspeção</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13:                                                      Número de informantes, Quantidade e Peso total das carcaças dos frangos abatidos, no mês e no trimestre, por tipo de inspeção</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14:                                                            Quantidade e Peso total das carcaças dos animais abatidos, por tipo de rebanho - Primeiros Resultados (série encerrada)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15:                                                       Quantidade e Peso total das carcaças dos animais abatidos, no mês e no trimestre, por tipo de rebanho - Primeiros Resultados</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: Número de informantes, Quantidade e Peso total das carcaças dos frangos abatidos, no mês e no trimestre, por tipo de inspeção (série encerrada com última divulgação em 7/12/2022)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The API at https://servicodados.ibge.gov.br could not be reached.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Please check your internet connection and access to IBGE ibge.gov.br or try again later.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
