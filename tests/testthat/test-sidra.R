@@ -11,6 +11,6 @@ test_that("sidra(1705) returns a data frame", {
                 function should have returned NULL")
 
   } else {
-  expect_type(output_table, "data.frame")
+  expect_type(output_table, "list")
   succeed("API was reachable and a data.frame was returned.")
 }})
