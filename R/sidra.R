@@ -180,8 +180,8 @@ sidra <- function (tabela, classificador="",
 
   # verificação do conteúdo
   # Checar se a requisição foi bem-sucedida
-  if (httr::status_code(response) != 200) {
-    stop("Erro ao acessar a API do SIDRA.")
+  if (is.null(response)){
+    return(invisible(NULL))
   }
 
 
