@@ -1,3 +1,7 @@
+# sidra 0.1.8
+
+* added and fixed test of main function, gracefully handling connectivity issues
+
 # sidra 0.1.7
 
 * Added helper function and api url check handling with graceful exit if no access
