@@ -1,3 +1,7 @@
+# sidra 0.1.9
+
+* fixes call_ibge for tests in Mac M1 and defaulting to not printing url in main function
+
 # sidra 0.1.8
 
 * added and fixed test of main function, gracefully handling connectivity issues
