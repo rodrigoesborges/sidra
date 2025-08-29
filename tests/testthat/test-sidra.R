@@ -6,9 +6,10 @@ library(sidra)       # load our package
 # Test whether the output is a data frame
 test_that("sidra(1705) returns a data frame", {
   output_table <- sidra(1705)
-  if(is.null(call_ibge({httr::GET('https://servicodados.ibge.gov.br/api/v3/agregados',config = httr::timeout(2))}))) {
-    expect_null(output_table,info = "API was not reacheable,
-                function should have returned NULL")
+  teste_conexao <- call_ibge({httr::GET('https://servicodados.ibge.gov.br/api/v3/agregados',config = httr::timeout(2))})
+  if(is.null(teste_conexao)) {
+    expect_null(output_table,info = paste(teste_conexao,"OR","API was not reacheable,
+                function should have returned NULL"))
 
   } else {
   expect_type(output_table, "list")

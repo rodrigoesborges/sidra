@@ -24,7 +24,7 @@ sidra <- function (tabela, classificador="",
                    filtro_niveis,
                    periodo =
                      tab_meta(tabela)$periodos, variavel = "all",
-                   inicio, fim,part=FALSE,printurl=TRUE)
+                   inicio, fim,part=FALSE,printurl=FALSE)
 {
   if (length(tabela) > 1) {
     stop("Solicite os dados de uma tabela por vez. Para mais de uma use fun\u00e7\u00f5es da fam\u00edlia apply",

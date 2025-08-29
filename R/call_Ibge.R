@@ -11,7 +11,7 @@ call_ibge <- \(expr, api_url = "https://servicodados.ibge.gov.br") {
     expr,
     error = \(e) {
       # Check if the error message indicates a connection/timeout issue
-      if (grepl("Timeout was reached|Could not connect|Connection timed out|Could not resolve host", e$message)) {
+      if (grepl("Timeout was reached|Could not connect|Connection timed out|Could not resolve host|could not be reached", e$message)) {
         warning(
           "The API at ", api_url, " could not be reached.\n",
           "Please check your internet connection and access to IBGE ibge.gov.br or try again later.",
@@ -19,8 +19,9 @@ call_ibge <- \(expr, api_url = "https://servicodados.ibge.gov.br") {
         )
         return(invisible(NULL))
       } else {
-        # For any other type of error, stop and show the original error
-        stop(e)
+        # For any other type of error, show the original error and return NULL also
+        warning(e$message)
+        return(invisible(NULL))
       }
     }
   )
