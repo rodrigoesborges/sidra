@@ -151,7 +151,7 @@ sidra <- function (tabela, classificador="",
 
   if (tamanho>1e5) {
     message(paste(
-      "A consulta exceder\u00e1 o limite de 100.000 permitido pela API.",
+      "A consulta exceder\u00e1 o limite de 100.000 pontos de dados permitido pela API.",
       "Vamos contornar este problema fazendo v\u00e1rias solicita\u00e7\u00f5es menores.",
       "Haver\u00e1 maior demora", sep = "\n"))
 
@@ -181,7 +181,8 @@ sidra <- function (tabela, classificador="",
   # verificação do conteúdo
   # Checar se a requisição foi bem-sucedida
   if (is.null(response)){
-    return(invisible(NULL))
+    warning("Sem acesso conseguido a URL da API do IBGE.")
+    return(invisible(data.table::data.table()))
   }
 
 

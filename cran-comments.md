@@ -1,9 +1,11 @@
 ## Resubmission
 This is a resubmission of the 'sidra' package.
 
- * testing timeout differences leading to errors in tests. Test results:
- * https://mac.r-project.org/macbuilder/results/1756494372-61e1301d5514a198/ 
- * https://win-builder.r-project.org/qoKf8zwx4A4K/00check.log
+ * Fixed testing timeout differences leading to errors in tests 
+ * forced empty data.table and warning in sidra function for tests. Test results:
+ * check_mac_release: https://mac.R-project.org/macbuilder/results/1757098635-a4aec59116e3f69a/ 
+ * check_win_devel: https://win-builder.r-project.org/A25CDPyvQ15F
+ * check_win_oldrelease: https://win-builder.r-project.org/nmvU1wR7cq0C/ 
 
 ## R CMD check results
 
