@@ -1,3 +1,11 @@
+# sidra 0.2.0
+
+* Network-dependent tests now skip on CRAN and when the IBGE API is
+  unreachable, removing intermittent test failures on CRAN check servers
+* Fixed test of tab_agr, which was incorrectly exercising the sidra function
+* Increased default timeout of API calls from 2 to 10 seconds for robustness
+  on slow connections
+
 # sidra 0.1.9
 
 * fixes call_ibge for tests in Mac M1 and defaulting to not printing url in main function

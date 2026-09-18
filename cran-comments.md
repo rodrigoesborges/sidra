@@ -1,11 +1,14 @@
 ## Resubmission
 This is a resubmission of the 'sidra' package.
 
- * Fixed testing timeout differences leading to errors in tests 
- * forced empty data.table and warning in sidra function for tests. Test results:
- * check_mac_release: https://mac.R-project.org/macbuilder/results/1757098635-a4aec59116e3f69a/ 
- * check_win_devel: https://win-builder.r-project.org/A25CDPyvQ15F
- * check_win_oldrelease: https://win-builder.r-project.org/nmvU1wR7cq0C/ 
+ * Network-dependent tests now use `skip_on_cran()` and `skip_if_offline()`,
+   so they no longer fail intermittently when the IBGE API is slow or
+   unreachable from CRAN check servers (cause of the previous ERRORs on
+   r-devel debian-clang/fedora).
+ * Fixed the test of `tab_agr()`, which was mistakenly exercising `sidra()`.
+ * Increased the internal API request timeout from 2 to 10 seconds; failed
+   connections are still handled gracefully (warning + empty return), so
+   examples and vignette cannot error when the API is unreachable.
 
 ## R CMD check results
 
@@ -25,10 +28,3 @@ This URL is correct and valid. However, it appears to be intermittently inaccess
 The URL is essential for the package's documentation as it points to the source of the data and the API's official documentation. I have verified that the link is active and correct. I kindly ask you to accept this NOTE, as it is due to external network conditions beyond my control.
 
 Thank you for your consideration.
-
-
-## R CMD check results
-
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
