@@ -194,6 +194,11 @@ sidra <- function (tabela, classificador="",
 
   res <- jsonlite::parse_json(json_data)
 
+  ## A API devolve [] quando não há dados no período pedido, e um objeto com
+  ## statusCode/message em caso de erro. Nos dois casos não há "resultados".
+  if (length(res) == 0 || !"resultados" %in% names(res[[1]])) {
+    return(tibble::tibble())
+  }
 
   res <-
     tibble::tibble(json=res)|>
