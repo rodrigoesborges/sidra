@@ -2,6 +2,14 @@
 
 ## sidra 0.2.0
 
+CRAN release: 2026-09-18
+
+- Suporte a tabelas sem classificacao (por exemplo a 6579, de populacao
+  residente estimada). Antes, tab_meta() e tab_niveis() falhavam com
+  “indice fora dos limites” e sidra() quebrava ao montar a consulta.
+- Corrige a conversao de valores para numerico: o suppressWarnings
+  envolvendo o mutate() inteiro anulava o as.numeric, devolvendo as
+  colunas de codigos e valores como texto.
 - Network-dependent tests now skip on CRAN and when the IBGE API is
   unreachable, removing intermittent test failures on CRAN check servers
 - Fixed test of tab_agr, which was incorrectly exercising the sidra
