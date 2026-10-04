@@ -74,8 +74,9 @@ sidra <- function (tabela, classificador="",
   } else if(!missing(classificador) & length(classificador)!=0){
     paste0(classificador,"[all]",collapse="|")
   } else {
-    paste0(paste0(gsub("[^[:digit:]]","",names(metatab$classificacoes)),
-                  collapse="[all],"),
+    class_cods <- gsub("[^[:digit:]]","",names(metatab$classificacoes))
+    if(length(class_cods)==0) "" else
+    paste0(paste0(class_cods,collapse="[all],"),
            "[all]")
   }
 
@@ -117,7 +118,7 @@ sidra <- function (tabela, classificador="",
         metatab$classificacoes
       }
 
-    sum(sapply(class_esc,nrow),na.rm=T)
+    if(length(class_esc)==0) 1L else sum(sapply(class_esc,nrow),na.rm=T)
   }
 
   #Definindo nlocs
@@ -198,21 +199,41 @@ sidra <- function (tabela, classificador="",
     tibble::tibble(json=res)|>
     tidyr::unnest_wider("json")|>
     tidyr::unnest_longer("resultados")|>
-    tidyr::unnest_wider("resultados")|>
-    tidyr::unnest_longer("classificacoes")|>
-    tidyr::unnest_wider("classificacoes",names_sep="_")|>
-    tidyr::unnest_longer("classificacoes_categoria")|>
-    tidyr::unnest_longer("series")|>
-    tidyr::unnest_wider("series")|>
-    tidyr::unnest_wider("localidade",names_sep="_")|>
-    tidyr::unnest_wider("localidade_nivel",names_sep="_")|>tidyr::unnest_longer("serie")|>
-    dplyr::rename(valor="serie",periodo="serie_id")|>
-    suppressWarnings(dplyr::mutate(dplyr::across(c("valor","periodo","id","localidade_id",
-                    "classificacoes_id","classificacoes_categoria_id"),as.numeric)))|>
-    tidyr::pivot_wider(
-      names_from = c("classificacoes_id","classificacoes_categoria_id","classificacoes_categoria"),
-      names_sep = "-",names_prefix = "c",values_from="valor")|>
-    dplyr::select(-c("classificacoes_nome"))
+    tidyr::unnest_wider("resultados")
+
+  ## Códigos e valores do SIDRA são numéricos; o SIDRA usa "..."/"-" para
+  ## valores ausentes, que viram NA. O suppressWarnings precisa ficar dentro de
+  ## `across()`: envolvendo o `mutate()` inteiro a conversão é ignorada.
+  as_num <- \(x) suppressWarnings(as.numeric(x))
+
+  if (length(metatab$classificacoes) == 0) {
+    res <-
+      res|>
+      tidyr::unnest_longer("series")|>
+      tidyr::unnest_wider("series")|>
+      tidyr::unnest_wider("localidade",names_sep="_")|>
+      tidyr::unnest_wider("localidade_nivel",names_sep="_")|>tidyr::unnest_longer("serie")|>
+      dplyr::rename(valor="serie",periodo="serie_id")|>
+      dplyr::mutate(dplyr::across(c("valor","periodo","id","localidade_id"),as_num))|>
+      dplyr::select(-c("classificacoes"))
+  } else {
+    res <-
+      res|>
+      tidyr::unnest_longer("classificacoes")|>
+      tidyr::unnest_wider("classificacoes",names_sep="_")|>
+      tidyr::unnest_longer("classificacoes_categoria")|>
+      tidyr::unnest_longer("series")|>
+      tidyr::unnest_wider("series")|>
+      tidyr::unnest_wider("localidade",names_sep="_")|>
+      tidyr::unnest_wider("localidade_nivel",names_sep="_")|>tidyr::unnest_longer("serie")|>
+      dplyr::rename(valor="serie",periodo="serie_id")|>
+      dplyr::mutate(dplyr::across(c("valor","periodo","id","localidade_id",
+                      "classificacoes_id","classificacoes_categoria_id"),as_num))|>
+      tidyr::pivot_wider(
+        names_from = c("classificacoes_id","classificacoes_categoria_id","classificacoes_categoria"),
+        names_sep = "-",names_prefix = "c",values_from="valor")|>
+      dplyr::select(-c("classificacoes_nome"))
+  }
 
   return(res)
 
