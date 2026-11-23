@@ -47,8 +47,8 @@ tab_meta <- \(tabela) {
   }
   extnclass <- \(x=1){ paste0(metatabela$classificacoes[[x]][c('id',"nome")],collapse="-")}
 
-  classificacoes <- lapply(seq_len(length(metatabela$classificacoes)),extclass)
-  names(classificacoes) <- sapply(seq_len(length(metatabela$classificacoes)),extnclass)
+  classificacoes <- lapply(seq_along(metatabela$classificacoes),extclass)
+  names(classificacoes) <- sapply(seq_along(metatabela$classificacoes),extnclass)
   metatabela$classificacoes <- classificacoes
 
   metatabela

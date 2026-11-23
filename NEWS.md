@@ -1,3 +1,11 @@
+# sidra 0.2.0.9000
+
+* tab_meta() no longer crashes on aggregates without classifications
+  (e.g. table 6691): `lapply(1:length(...))` evaluated `1:0` and failed
+  with 'subscript out of bounds' on `classificacoes[[1]]`
+* sidra() omits the `classificacao` query parameter when the table has no
+  classifications, instead of sending `classificacao=[all]`
+
 # sidra 0.2.0
 
 * Suporte a tabelas sem classificacao (por exemplo a 6579, de populacao
