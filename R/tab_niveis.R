@@ -37,7 +37,7 @@ tab_niveis <- \(tabela) {
     f
   }
 
-  nivtab <- data.table::rbindlist(lapply(1:length(nivtab),flatniv))
+  nivtab <- data.table::rbindlist(lapply(seq_len(length(nivtab)),flatniv))
 
   nivtab
 }
