@@ -73,10 +73,12 @@ sidra <- function (tabela, classificador="",
     paste0(paste0(classificador,"[",sapply(filtro_cats,concav),"]"),collapse="|")
   } else if(!missing(classificador) & length(classificador)!=0){
     paste0(classificador,"[all]",collapse="|")
-  } else {
+  } else if (length(metatab$classificacoes)) {
     paste0(paste0(gsub("[^[:digit:]]","",names(metatab$classificacoes)),
                   collapse="[all],"),
            "[all]")
+  } else {
+    ""
   }
 
   locais <- if(!missing(filtro_niveis)) {
@@ -117,7 +119,7 @@ sidra <- function (tabela, classificador="",
         metatab$classificacoes
       }
 
-    sum(sapply(class_esc,nrow),na.rm=T)
+    sum(vapply(class_esc,nrow,integer(1L)),na.rm=T)
   }
 
   #Definindo nlocs
@@ -144,8 +146,8 @@ sidra <- function (tabela, classificador="",
   url <- gsub("\\[\\]","",paste0(base_url, tabela,
                                  "/periodos/", periodo,
                                  "/variaveis/", variavel,
-                                 "?classificacao=", classifs,
-                                 "&localidades=", locais))
+                                 "?localidades=", locais,
+                                 if(nzchar(classifs)) paste0("&classificacao=", classifs) else ""))
 
   if(printurl){print(url)}
 
@@ -198,21 +200,34 @@ sidra <- function (tabela, classificador="",
     tibble::tibble(json=res)|>
     tidyr::unnest_wider("json")|>
     tidyr::unnest_longer("resultados")|>
-    tidyr::unnest_wider("resultados")|>
-    tidyr::unnest_longer("classificacoes")|>
-    tidyr::unnest_wider("classificacoes",names_sep="_")|>
-    tidyr::unnest_longer("classificacoes_categoria")|>
-    tidyr::unnest_longer("series")|>
-    tidyr::unnest_wider("series")|>
-    tidyr::unnest_wider("localidade",names_sep="_")|>
-    tidyr::unnest_wider("localidade_nivel",names_sep="_")|>tidyr::unnest_longer("serie")|>
-    dplyr::rename(valor="serie",periodo="serie_id")|>
-    suppressWarnings(dplyr::mutate(dplyr::across(c("valor","periodo","id","localidade_id",
-                    "classificacoes_id","classificacoes_categoria_id"),as.numeric)))|>
-    tidyr::pivot_wider(
-      names_from = c("classificacoes_id","classificacoes_categoria_id","classificacoes_categoria"),
-      names_sep = "-",names_prefix = "c",values_from="valor")|>
-    dplyr::select(-c("classificacoes_nome"))
+    tidyr::unnest_wider("resultados")
+
+  res <- if(length(metatab$classificacoes)){
+    res |>
+      tidyr::unnest_longer("classificacoes")|>
+      tidyr::unnest_wider("classificacoes",names_sep="_")|>
+      tidyr::unnest_longer("classificacoes_categoria")|>
+      tidyr::unnest_longer("series")|>
+      tidyr::unnest_wider("series")|>
+      tidyr::unnest_wider("localidade",names_sep="_")|>
+      tidyr::unnest_wider("localidade_nivel",names_sep="_")|>tidyr::unnest_longer("serie")|>
+      dplyr::rename(valor="serie",periodo="serie_id")|>
+      suppressWarnings(dplyr::mutate(dplyr::across(c("valor","periodo","id","localidade_id",
+                      "classificacoes_id","classificacoes_categoria_id"),as.numeric)))|>
+      tidyr::pivot_wider(
+        names_from = c("classificacoes_id","classificacoes_categoria_id","classificacoes_categoria"),
+        names_sep = "-",names_prefix = "c",values_from="valor")|>
+      dplyr::select(-c("classificacoes_nome"))
+  } else {
+    res |>
+      dplyr::select(-"classificacoes")|>
+      tidyr::unnest_longer("series")|>
+      tidyr::unnest_wider("series")|>
+      tidyr::unnest_wider("localidade",names_sep="_")|>
+      tidyr::unnest_wider("localidade_nivel",names_sep="_")|>tidyr::unnest_longer("serie")|>
+      dplyr::rename(valor="serie",periodo="serie_id")|>
+      suppressWarnings(dplyr::mutate(dplyr::across(c("valor","periodo","id","localidade_id"),as.numeric)))
+  }
 
   return(res)
 
