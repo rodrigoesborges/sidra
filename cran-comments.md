@@ -1,30 +1,22 @@
 ## Resubmission
-This is a resubmission of the 'sidra' package.
+This is a resubmission of the 'sidra' package. It fixes a bug in the
+0.2.0 release (2026-09-18):
 
- * Network-dependent tests now use `skip_on_cran()` and `skip_if_offline()`,
-   so they no longer fail intermittently when the IBGE API is slow or
-   unreachable from CRAN check servers (cause of the previous ERRORs on
-   r-devel debian-clang/fedora).
- * Fixed the test of `tab_agr()`, which was mistakenly exercising `sidra()`.
- * Increased the internal API request timeout from 2 to 10 seconds; failed
-   connections are still handled gracefully (warning + empty return), so
-   examples and vignette cannot error when the API is unreachable.
+ * tab_meta() crashed with 'subscript out of bounds' when the aggregate
+   has no classifications (e.g. IBGE table 6691, GDP of municipalities),
+   because `1:length(NULL)` evaluated to `c(1, 0)`.
+ * sidra() sent `classificacao=[all]` even for aggregates without
+   classifications; the query parameter is now omitted and the response
+   is parsed in a dedicated branch that handles the absence of the
+   classification columns.
 
 ## R CMD check results
 
-There were no ERRORs or WARNINGs.
+There were no ERRORs, WARNINGs, or NOTEs (R 4.5.3, x86_64 Linux).
 
-There is one NOTE regarding a possibly invalid URL:
-
-*   **URL: https://servicodados.ibge.gov.br/api/docs/agregados?versao=3**
-    *   **Message:** `Connection timed out after 60000 milliseconds`
-
-### Comments on the URL check NOTE
-
-The URL `https://servicodados.ibge.gov.br` is the official and stable API endpoint for the Brazilian Institute of Geography and Statistics (IBGE), a major government agency in Brazil.
-
-This URL is correct and valid. However, it appears to be intermittently inaccessible from some servers outside of Brazil, which likely includes some of the CRAN check servers. This is a known issue with this specific government service.
-
-The URL is essential for the package's documentation as it points to the source of the data and the API's official documentation. I have verified that the link is active and correct. I kindly ask you to accept this NOTE, as it is due to external network conditions beyond my control.
-
-Thank you for your consideration.
+The previous submission carried a NOTE about a possibly invalid URL
+(https://servicodados.ibge.gov.br): the endpoint is correct and
+reachable, but is intermittently inaccessible from servers outside
+Brazil. Should the NOTE reappear on some CRAN check server, it is due
+to these external network conditions; the URL is the official IBGE API
+documentation and is essential to the package.
