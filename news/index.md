@@ -1,6 +1,12 @@
 # Changelog
 
+## sidra 0.2.2
+
+- Added CRAN downloads badge to README
+
 ## sidra 0.2.1
+
+CRAN release: 2026-11-24
 
 - tab_meta() no longer crashes on aggregates without classifications
   (e.g. table 6691): `lapply(1:length(...))` evaluated `1:0` and failed
