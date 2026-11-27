@@ -1,3 +1,7 @@
+# sidra 0.2.2
+
+* Added CRAN downloads badge to README
+
 # sidra 0.2.1
 
 * tab_meta() no longer crashes on aggregates without classifications

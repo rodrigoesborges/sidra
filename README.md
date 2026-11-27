@@ -6,6 +6,8 @@ Rodrigo E. S. Borges
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/sidra)](https://CRAN.R-project.org/package=sidra)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/sidra)](https://cranlogs.r-pkg.org/badges/sidra)
 [![check](https://github.com/rodrigoesborges/sidra/actions/workflows/check.yaml/badge.svg)](https://github.com/rodrigoesborges/sidra/actions/workflows/check.yaml)
 [![codecov](https://codecov.io/gh/rodrigoesborges/sidra/graph/badge.svg?token=7B3AMAQYHS)](https://app.codecov.io/gh/rodrigoesborges/sidra)
 [![Lifecycle:
